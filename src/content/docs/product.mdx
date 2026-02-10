@@ -1,0 +1,33 @@
+---
+title: Tool directions
+---
+
+# Turning this into a product/tool
+
+A strong wedge is **Design QA + Token Enforcement for engineers**.
+
+## MVP 1: Token linter (code)
+- Flags non-token spacing/font sizes in CSS/Tailwind
+- Suggests the nearest token
+- Can be density-aware (compact vs comfortable)
+
+## MVP 2: Browser extension (runtime)
+- Reads computed styles in the DOM
+- Flags:
+  - off-grid spacing (not multiple of 4/8)
+  - inconsistent type scale
+  - low contrast
+  - accent overuse
+
+## MVP 3: Figma → tokens generator
+- Detect spacing and type ramps in an existing Figma file
+- Export:
+  - CSS variables
+  - Tailwind theme
+  - JSON tokens
+
+## Differentiator: “Corrections, not creativity”
+Don’t try to generate a new design.
+Instead, propose **token-correct** fixes:
+- “18px isn’t allowed; choose 16 or 24. Based on density=comfortable: 24.”
+- “This heading breaks the scale; choose 24 or 32. Choose 32 for hierarchy.”

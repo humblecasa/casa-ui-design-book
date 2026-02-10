@@ -1,0 +1,32 @@
+---
+title: Spacing tokens
+---
+
+# Spacing tokens (8px grid + 4px micro)
+
+Use **8px** as the main rhythm and allow **4px** for micro-alignment.
+
+## Recommended spacing scale
+- `space-0`: 0
+- `space-1`: 4
+- `space-2`: 8
+- `space-3`: 12
+- `space-4`: 16
+- `space-5`: 24
+- `space-6`: 32
+- `space-7`: 40
+- `space-8`: 48
+- `space-9`: 64
+- `space-10`: 80
+- `space-11`: 96
+
+## Anti-guesswork rules
+- **Inside components:** only `{4, 8, 12, 16, 24}`
+- **Between sections:** only `{24, 32, 48, 64}`
+- No one-off values in production (`18px`, `22px`) unless promoted to a token.
+
+## Defaults that work in most apps
+- Section padding: `48`
+- Card padding: `24`
+- Inside-card stack gap: `12` or `16`
+- Major vertical rhythm: `32`
