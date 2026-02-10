@@ -20,7 +20,7 @@ export default defineConfig({
         github: 'https://github.com/humblecasa/casa-ui-design-book',
       },
       sidebar: [
-        { label: 'Start here', items: [{ label: 'Overview', slug: '' }] },
+        { label: 'Start here', items: [{ label: 'Overview', slug: 'index' }] },
         {
           label: 'System',
           items: [
