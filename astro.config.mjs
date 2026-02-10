@@ -8,7 +8,8 @@ import starlight from '@astrojs/starlight';
 //   https://humblecasa.github.io/casa-ui-design-book/
 
 export default defineConfig({
-  site: 'https://humblecasa.github.io',
+  // NOTE: We intentionally omit `site` to avoid sitemap generation issues in CI.
+  // GitHub Pages works fine with `base` alone.
   base: '/casa-ui-design-book',
   integrations: [
     starlight({
