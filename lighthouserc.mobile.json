@@ -2,7 +2,7 @@
   "ci": {
     "collect": {
       "staticDistDir": "./dist",
-      "url": ["http://localhost/casa-ui-design-book/"],
+      "url": ["http://localhost/"],
       "settings": {
         "preset": "mobile"
       }
