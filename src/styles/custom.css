@@ -1,0 +1,81 @@
+/* Starlight custom theme overrides
+   Keep this file lightweight (CSS only) to preserve fast LCP.
+*/
+
+:root {
+  /* A calmer, more "product" look */
+  --sl-color-accent-low: #e8f1ff;
+  --sl-color-accent: #2563eb; /* blue-600 */
+  --sl-color-accent-high: #1e3a8a; /* indigo-900 */
+
+  --sl-color-white: #ffffff;
+  --sl-color-gray-1: #f8fafc; /* slate-50 */
+  --sl-color-gray-2: #f1f5f9; /* slate-100 */
+  --sl-color-gray-3: #e2e8f0; /* slate-200 */
+  --sl-color-gray-4: #cbd5e1; /* slate-300 */
+  --sl-color-gray-5: #94a3b8; /* slate-400 */
+  --sl-color-gray-6: #64748b; /* slate-500 */
+  --sl-color-gray-7: #475569; /* slate-600 */
+  --sl-color-gray-8: #334155; /* slate-700 */
+  --sl-color-gray-9: #1f2937; /* gray-800 */
+
+  /* Typography */
+  --sl-font-system: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji",
+    "Segoe UI Emoji";
+  --sl-font: var(--sl-font-system);
+  --sl-text-h1: 2rem;
+  --sl-text-h2: 1.5rem;
+}
+
+/* Make the content feel less cramped on desktop */
+.main-pane {
+  max-width: 1040px;
+}
+
+/* Improve paragraph readability */
+.sl-markdown-content {
+  line-height: 1.65;
+}
+
+.sl-markdown-content p,
+.sl-markdown-content li {
+  color: var(--sl-color-gray-8);
+}
+
+.sl-markdown-content h1,
+.sl-markdown-content h2,
+.sl-markdown-content h3 {
+  letter-spacing: -0.01em;
+}
+
+/* Better code blocks */
+.sl-markdown-content pre {
+  border: 1px solid var(--sl-color-gray-3);
+  border-radius: 12px;
+}
+
+.sl-markdown-content code {
+  font-size: 0.95em;
+}
+
+/* Make callouts stand out nicely */
+.sl-markdown-content .starlight-aside {
+  border-radius: 12px;
+}
+
+/* Slightly bolder sidebar for contrast */
+.sidebar {
+  border-right: 1px solid var(--sl-color-gray-3);
+}
+
+/* Reduce visual noise on tables */
+.sl-markdown-content table {
+  border: 1px solid var(--sl-color-gray-3);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.sl-markdown-content table th,
+.sl-markdown-content table td {
+  border-bottom: 1px solid var(--sl-color-gray-3);
+}
