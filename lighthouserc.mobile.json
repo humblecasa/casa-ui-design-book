@@ -2,10 +2,7 @@
   "ci": {
     "collect": {
       "staticDistDir": "./dist",
-      "url": ["http://localhost/"],
-      "settings": {
-        "preset": "mobile"
-      }
+      "url": ["http://localhost/"]
     },
     "assert": {
       "assertions": {
