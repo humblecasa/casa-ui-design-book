@@ -19,8 +19,8 @@ If you want “not ugly” consistently, the pattern is the same across elite te
 Top teams avoid one-off styling. They define spacing, type, color, radii, motion, and component primitives up front.
 
 - **Google Material Design 3**: strong token model and component guidance.
-- **IBM Carbon**: enterprise-grade design tokens + coded components.
 - **Shopify Polaris**: product UX conventions and implementation standards.
+- **GitHub Primer**: design language tightly connected to implementation.
 
 **What to copy:**
 - Tokenized design decisions (not “pick any value”)
@@ -29,8 +29,8 @@ Top teams avoid one-off styling. They define spacing, type, color, radii, motion
 
 **Sources:**
 - Material Design 3: https://m3.material.io/
-- IBM Carbon: https://carbondesignsystem.com/
 - Shopify Polaris: https://polaris.shopify.com/
+- GitHub Primer: https://primer.style/
 
 ---
 
@@ -39,8 +39,8 @@ Top teams avoid one-off styling. They define spacing, type, color, radii, motion
 The best orgs treat design docs as living infrastructure.
 
 - **Atlassian Design System**: practical usage guidance + patterns.
-- **GitHub Primer**: design language tightly connected to implementation.
-- **Microsoft Fluent 2**: principles, patterns, and components with clarity.
+- **GitHub Primer**: design docs tightly connected to implementation.
+- **Microsoft Fluent 2**: principles, patterns, and components with clear guidance.
 
 **What to copy:**
 - Every component page includes anatomy, states, content guidance, accessibility, and code examples.
@@ -99,6 +99,30 @@ Great UX is rarely one-shot. It’s shipped, measured, refined.
 - Weekly UI polish pass.
 - Monthly design debt cleanup.
 - Maintain a “known rough edges” board.
+
+---
+
+## Out-of-the-box solutions (fast ways to raise quality)
+
+If speed matters, these are practical defaults teams use:
+
+### A) Docs/product sites
+- **Astro Starlight** (already used here): docs IA + navigation + search-ready structure.
+- **Docusaurus**: widely used docs framework, plugin ecosystem.
+- **Nextra**: Next.js docs/blog style with clean defaults.
+
+### B) UI components (production-ready)
+- **shadcn/ui** (on top of Radix + Tailwind): highly popular in modern SaaS teams.
+- **Radix UI** primitives: accessibility-focused unstyled components.
+- **MUI**: comprehensive React component library based on Material principles.
+
+### C) Design systems to borrow from
+- **Material 3** (Google), **Fluent 2** (Microsoft), **Primer** (GitHub), **Polaris** (Shopify), **Atlassian Design**.
+
+### Suggested path for this site
+1. Keep Astro + Starlight for docs structure.
+2. Add Tailwind tokens for tighter spacing/type consistency.
+3. Use shadcn/ui patterns for buttons/forms/cards so UI feels more premium quickly.
 
 ---
 
