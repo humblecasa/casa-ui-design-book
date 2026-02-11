@@ -32,6 +32,16 @@ jobs:
       - name: Build
         run: npm run build
 
+      # Strict perf gates (desktop + mobile). Fails the workflow if we regress.
+      - name: Lighthouse CI (desktop)
+        run: |
+          npm install -D @lhci/cli@0.13.0
+          npx lhci autorun --config=./lighthouserc.desktop.json
+
+      - name: Lighthouse CI (mobile)
+        run: |
+          npx lhci autorun --config=./lighthouserc.mobile.json
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
