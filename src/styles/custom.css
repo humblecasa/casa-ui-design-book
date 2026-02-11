@@ -1,81 +1,157 @@
-/* Starlight custom theme overrides
-   Keep this file lightweight (CSS only) to preserve fast LCP.
-*/
+/* Premium, Vercel-inspired minimal theme (no external assets, performance-safe) */
 
 :root {
-  /* A calmer, more "product" look */
-  --sl-color-accent-low: #e8f1ff;
-  --sl-color-accent: #2563eb; /* blue-600 */
-  --sl-color-accent-high: #1e3a8a; /* indigo-900 */
+  --sl-color-accent-low: #e8ecff;
+  --sl-color-accent: #4f46e5;
+  --sl-color-accent-high: #1e1b4b;
 
   --sl-color-white: #ffffff;
-  --sl-color-gray-1: #f8fafc; /* slate-50 */
-  --sl-color-gray-2: #f1f5f9; /* slate-100 */
-  --sl-color-gray-3: #e2e8f0; /* slate-200 */
-  --sl-color-gray-4: #cbd5e1; /* slate-300 */
-  --sl-color-gray-5: #94a3b8; /* slate-400 */
-  --sl-color-gray-6: #64748b; /* slate-500 */
-  --sl-color-gray-7: #475569; /* slate-600 */
-  --sl-color-gray-8: #334155; /* slate-700 */
-  --sl-color-gray-9: #1f2937; /* gray-800 */
+  --sl-color-gray-1: #f8fafc;
+  --sl-color-gray-2: #f1f5f9;
+  --sl-color-gray-3: #e2e8f0;
+  --sl-color-gray-4: #cbd5e1;
+  --sl-color-gray-5: #94a3b8;
+  --sl-color-gray-6: #64748b;
+  --sl-color-gray-7: #475569;
+  --sl-color-gray-8: #1f2937;
+  --sl-color-gray-9: #0b1020;
 
-  /* Typography */
-  --sl-font-system: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji",
-    "Segoe UI Emoji";
-  --sl-font: var(--sl-font-system);
-  --sl-text-h1: 2rem;
-  --sl-text-h2: 1.5rem;
+  --sl-font: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
+    "Apple Color Emoji", "Segoe UI Emoji";
+  --sl-text-h1: clamp(2.1rem, 5vw, 3.2rem);
+  --sl-text-h2: clamp(1.45rem, 3vw, 2rem);
 }
 
-/* Make the content feel less cramped on desktop */
+body {
+  background:
+    radial-gradient(1000px 500px at 10% -8%, rgba(79, 70, 229, 0.09), transparent 55%),
+    radial-gradient(1000px 500px at 90% -12%, rgba(14, 165, 233, 0.08), transparent 52%),
+    #ffffff;
+}
+
 .main-pane {
-  max-width: 1040px;
+  max-width: 1120px;
 }
 
-/* Improve paragraph readability */
+/* Typography polish */
 .sl-markdown-content {
-  line-height: 1.65;
-}
-
-.sl-markdown-content p,
-.sl-markdown-content li {
-  color: var(--sl-color-gray-8);
+  line-height: 1.72;
 }
 
 .sl-markdown-content h1,
 .sl-markdown-content h2,
 .sl-markdown-content h3 {
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
+  font-weight: 650;
 }
 
-/* Better code blocks */
-.sl-markdown-content pre {
-  border: 1px solid var(--sl-color-gray-3);
-  border-radius: 12px;
+.sl-markdown-content p,
+.sl-markdown-content li {
+  color: #1e293b;
 }
 
-.sl-markdown-content code {
-  font-size: 0.95em;
-}
-
-/* Make callouts stand out nicely */
-.sl-markdown-content .starlight-aside {
-  border-radius: 12px;
-}
-
-/* Slightly bolder sidebar for contrast */
+/* Clean nav and content chrome */
 .sidebar {
-  border-right: 1px solid var(--sl-color-gray-3);
+  border-right: 1px solid rgba(15, 23, 42, 0.08);
+  background: rgba(255, 255, 255, 0.84);
+  backdrop-filter: blur(6px);
 }
 
-/* Reduce visual noise on tables */
+header {
+  backdrop-filter: blur(8px);
+}
+
+.sl-markdown-content pre {
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 14px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
 .sl-markdown-content table {
-  border: 1px solid var(--sl-color-gray-3);
+  border: 1px solid rgba(15, 23, 42, 0.08);
   border-radius: 12px;
   overflow: hidden;
 }
 
-.sl-markdown-content table th,
-.sl-markdown-content table td {
-  border-bottom: 1px solid var(--sl-color-gray-3);
+/* Home page components */
+.hero {
+  position: relative;
+  padding: clamp(2rem, 5vw, 3.8rem);
+  margin: 0 0 2rem;
+  border-radius: 20px;
+  background: linear-gradient(160deg, #0f172a 0%, #111827 50%, #1e1b4b 100%);
+  color: #f8fafc;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 50px -30px rgba(15, 23, 42, 0.65);
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: -35% -15% auto auto;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.36), transparent 60%);
+  pointer-events: none;
+}
+
+.hero .kicker {
+  display: inline-block;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #93c5fd;
+  margin-bottom: 0.8rem;
+}
+
+.hero h1 {
+  margin: 0 0 0.9rem;
+  color: #f8fafc;
+}
+
+.hero p {
+  max-width: 70ch;
+  margin: 0;
+  color: #dbeafe;
+}
+
+.metrics,
+.cards {
+  display: grid;
+  gap: 1rem;
+  margin: 1.4rem 0 2rem;
+}
+
+.metrics {
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+}
+
+.cards {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.panel {
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.78);
+  padding: 1rem 1.1rem;
+  box-shadow: 0 6px 22px -20px rgba(2, 6, 23, 0.45);
+}
+
+.panel strong {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.quickstart {
+  border: 1px solid rgba(79, 70, 229, 0.2);
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(238, 242, 255, 0.75), rgba(255, 255, 255, 0.92));
+  padding: 1rem 1.1rem;
+}
+
+.quickstart ol {
+  margin-bottom: 0;
 }
