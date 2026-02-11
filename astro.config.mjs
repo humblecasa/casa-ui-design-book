@@ -39,6 +39,10 @@ export default defineConfig({
             { label: 'Checklist', slug: 'checklist' },
           ],
         },
+        {
+          label: 'Benchmarks',
+          items: [{ label: 'How top tech teams do design', slug: 'design-benchmarks' }],
+        },
         { label: 'Product ideas', items: [{ label: 'Tool directions', slug: 'product' }] },
       ],
     }),

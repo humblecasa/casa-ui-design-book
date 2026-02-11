@@ -1,0 +1,116 @@
+---
+title: How top tech teams do design
+---
+
+# How top tech companies actually perform design
+
+If you want “not ugly” consistently, the pattern is the same across elite teams:
+
+1. **Shared design system** (tokens, components, rules)
+2. **Documentation as product** (not a side wiki)
+3. **Design + engineering co-ownership**
+4. **Accessibility and performance as default gates**
+5. **Continuous iteration with real user feedback**
+
+---
+
+## 1) System first: tokens + primitives + constraints
+
+Top teams avoid one-off styling. They define spacing, type, color, radii, motion, and component primitives up front.
+
+- **Google Material Design 3**: strong token model and component guidance.
+- **IBM Carbon**: enterprise-grade design tokens + coded components.
+- **Shopify Polaris**: product UX conventions and implementation standards.
+
+**What to copy:**
+- Tokenized design decisions (not “pick any value”)
+- Clear “do / don’t” examples
+- Components mapped to real product use cases
+
+**Sources:**
+- Material Design 3: https://m3.material.io/
+- IBM Carbon: https://carbondesignsystem.com/
+- Shopify Polaris: https://polaris.shopify.com/
+
+---
+
+## 2) Documentation quality is part of product quality
+
+The best orgs treat design docs as living infrastructure.
+
+- **Atlassian Design System**: practical usage guidance + patterns.
+- **GitHub Primer**: design language tightly connected to implementation.
+- **Microsoft Fluent 2**: principles, patterns, and components with clarity.
+
+**What to copy:**
+- Every component page includes anatomy, states, content guidance, accessibility, and code examples.
+- Release/version notes for design system changes.
+- Fast search and strong information architecture.
+
+**Sources:**
+- Atlassian Design System: https://atlassian.design/
+- GitHub Primer: https://primer.style/
+- Fluent 2: https://fluent2.microsoft.design/
+
+---
+
+## 3) Design-engineering partnership beats handoff culture
+
+High-performing teams reduce “throw over the wall” behavior.
+
+- Designers and engineers align on constraints early.
+- Visual QA is part of engineering acceptance criteria.
+- Product/design/engineering review together before shipping.
+
+**What to copy:**
+- Add “design acceptance checklist” to PR template.
+- Require token usage (no arbitrary spacing/typography values).
+- Ship screenshots/visual diffs for key UI surfaces.
+
+---
+
+## 4) Accessibility and performance are non-negotiable
+
+Top teams treat a11y/perf as product requirements.
+
+- **WCAG** principles applied from first draft, not patch stage.
+- Performance budgets and automated checks in CI.
+
+**What to copy:**
+- Lighthouse + accessibility checks in CI (already in your pipeline).
+- Color contrast checks and keyboard navigation verification.
+- Guardrails for layout shift and interaction delays.
+
+**Sources:**
+- WCAG overview (W3C): https://www.w3.org/WAI/standards-guidelines/wcag/
+- Web.dev performance guidance: https://web.dev/performance/
+
+---
+
+## 5) Brand and craft evolve through iteration loops
+
+Great UX is rarely one-shot. It’s shipped, measured, refined.
+
+- Collect qualitative feedback (sessions, support, sales objections).
+- Measure behavior (drop-off, conversion, retention).
+- Iterate copy, hierarchy, spacing, and interaction details.
+
+**What to copy:**
+- Weekly UI polish pass.
+- Monthly design debt cleanup.
+- Maintain a “known rough edges” board.
+
+---
+
+## A practical standard for this site (starting now)
+
+For every page/component update:
+
+- **Visual**: hierarchy is obvious in 3 seconds
+- **Spacing**: follows token scale only
+- **Type**: no arbitrary font sizes
+- **Interaction**: links/buttons have clear hover/focus states
+- **Accessibility**: contrast + keyboard sanity check
+- **Performance**: keep Lighthouse guardrails green
+
+If any of these fail, we don’t call it done.
