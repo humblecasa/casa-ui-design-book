@@ -127,6 +127,26 @@ a[role="button"]:hover {
   box-shadow: 0 10px 24px -16px rgba(79, 70, 229, 0.8);
 }
 
+/* Ensure mobile burger/menu button is always visible */
+button[aria-label="Menu"] {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  min-height: 34px;
+  margin: 0.2rem 0.6rem 0.2rem 0.1rem;
+  border: 1px solid rgba(79, 70, 229, 0.35);
+  border-radius: 10px;
+  background: #ffffff;
+  color: #111827;
+  z-index: 20;
+}
+
+button[aria-label="Menu"] svg {
+  stroke: currentColor;
+  color: #111827;
+}
+
 /* Clean nav and content chrome */
 .sidebar {
   border-right: 1px solid rgba(15, 23, 42, 0.08);
