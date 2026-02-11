@@ -1,0 +1,86 @@
+---
+title: AI chat component gallery
+---
+
+# AI chat component gallery (copy-paste starters)
+
+Use these as baseline blocks for shadcn/Tailwind implementations.
+
+## 1) Message bubbles (assistant + user)
+
+```html
+<div class="space-y-3">
+  <div class="max-w-[78%] rounded-2xl border bg-white p-3 shadow-sm">
+    <p class="text-sm text-slate-800">Assistant answer with clear structure...</p>
+  </div>
+  <div class="ml-auto max-w-[78%] rounded-2xl bg-indigo-600 p-3 text-white">
+    <p class="text-sm">User prompt goes here.</p>
+  </div>
+</div>
+```
+
+## 2) Citation chips block
+
+```html
+<div class="mt-2 flex flex-wrap gap-2">
+  <a class="rounded-full border px-2.5 py-1 text-xs hover:bg-slate-50" href="#">Source: API docs</a>
+  <a class="rounded-full border px-2.5 py-1 text-xs hover:bg-slate-50" href="#">Source: Runbook</a>
+</div>
+```
+
+## 3) Tool-call result card
+
+```html
+<div class="rounded-xl border bg-slate-50 p-3">
+  <div class="mb-1 text-xs font-medium text-slate-500">Tool: search_issues</div>
+  <pre class="overflow-auto text-xs">{"count":3,"items":["...", "...", "..."]}</pre>
+</div>
+```
+
+## 4) Confirmation modal (side effects)
+
+```tsx
+<Dialog>
+  <DialogTrigger asChild><Button>Send to customer</Button></DialogTrigger>
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle>Confirm external action</DialogTitle>
+      <DialogDescription>
+        This will send a message to a real customer. Continue?
+      </DialogDescription>
+    </DialogHeader>
+    <DialogFooter>
+      <Button variant="outline">Cancel</Button>
+      <Button>Confirm send</Button>
+    </DialogFooter>
+  </DialogContent>
+</Dialog>
+```
+
+## 5) Sticky composer row
+
+```html
+<div class="sticky bottom-0 border-t bg-white/90 p-3 backdrop-blur">
+  <div class="flex items-end gap-2">
+    <textarea class="min-h-[44px] flex-1 rounded-xl border p-2.5" placeholder="Ask anything..."></textarea>
+    <button class="rounded-xl border px-3 py-2">Attach</button>
+    <button class="rounded-xl bg-indigo-600 px-3 py-2 text-white">Send</button>
+  </div>
+</div>
+```
+
+## 6) Empty/loading/error states
+
+```html
+<div class="rounded-xl border border-dashed p-6 text-center text-sm text-slate-500">Ask a question to get started.</div>
+<div class="rounded-xl border p-6 text-sm text-slate-500">Thinking… <span class="animate-pulse">●</span></div>
+<div class="rounded-xl border border-rose-200 bg-rose-50 p-4 text-sm text-rose-700">Something failed. Retry or switch source.</div>
+```
+
+## Shipping checklist for chat UIs
+
+- Every factual answer has citation links
+- External actions require confirmation
+- Keyboard-only flow works end-to-end
+- Composer stays usable on mobile
+- Empty/loading/error states are intentional

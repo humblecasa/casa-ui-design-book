@@ -59,7 +59,10 @@ export default defineConfig({
         },
         {
           label: 'Framework setup',
-          items: [{ label: 'Tailwind + shadcn quickstart', slug: 'tailwind-shadcn-setup' }],
+          items: [
+            { label: 'Tailwind + shadcn quickstart', slug: 'tailwind-shadcn-setup' },
+            { label: 'AI chat component gallery', slug: 'ai-chat-component-gallery' },
+          ],
         },
         { label: 'Product ideas', items: [{ label: 'Tool directions', slug: 'product' }] },
       ],
