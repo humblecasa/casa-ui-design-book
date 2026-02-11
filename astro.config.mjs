@@ -44,6 +44,7 @@ export default defineConfig({
           items: [
             { label: 'How top tech teams do design', slug: 'design-benchmarks' },
             { label: 'Before/after UI examples', slug: 'ui-examples' },
+            { label: 'AI chat UI use cases', slug: 'ai-chat-ui' },
           ],
         },
         { label: 'Product ideas', items: [{ label: 'Tool directions', slug: 'product' }] },

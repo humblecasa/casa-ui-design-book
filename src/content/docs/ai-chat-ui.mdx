@@ -1,0 +1,127 @@
+---
+title: AI chat UI use cases
+---
+
+# AI chat UI use cases (practical patterns)
+
+A good AI chat interface is not just a message list. It needs clear states, trust signals, and quick actions.
+
+## 1) SaaS support copilot
+
+**Use case:** user asks product/setup questions.
+
+**UI blocks:**
+- Left: conversation
+- Right: sources + related docs
+- Composer: prompt + file upload + slash commands
+
+**Must-have interactions:**
+- “Show source” on every factual answer
+- Suggested follow-up chips
+- Escalate to human button
+
+---
+
+## 2) Internal ops assistant (team workspace)
+
+**Use case:** query SOPs, runbooks, dashboards.
+
+**UI blocks:**
+- Chat thread
+- Context selector (workspace/project/date)
+- Action panel (open ticket, create task, notify team)
+
+**Must-have interactions:**
+- Role-based data visibility
+- Confirmation step before external actions
+- Audit trail for actions taken
+
+---
+
+## 3) Coding copilot panel
+
+**Use case:** generate/edit code and explain diffs.
+
+**UI blocks:**
+- Prompt + code editor split view
+- Diff viewer with approve/reject chunks
+- Test/run status panel
+
+**Must-have interactions:**
+- “Apply patch” only after review
+- Inline rationale for each change
+- One-click rollback
+
+---
+
+## 4) Sales / GTM research chat
+
+**Use case:** summarize accounts, draft outbound, compare competitors.
+
+**UI blocks:**
+- Chat + citations
+- Account profile drawer
+- Output templates (email, call brief, battlecard)
+
+**Must-have interactions:**
+- Source recency indicator
+- Confidence label (high/med/low)
+- Save output directly to CRM notes
+
+---
+
+## 5) Personal finance/ops copilot
+
+**Use case:** spending summaries, reminders, anomalies.
+
+**UI blocks:**
+- Chat summary cards
+- Trend mini charts
+- Alert center (due date, suspicious charge)
+
+**Must-have interactions:**
+- “Why this alert?” explanation
+- one-tap snooze/dismiss
+- private mode + redacted export
+
+---
+
+## Reusable component checklist for AI chat
+
+- **Message bubble variants:** user, assistant, system, error
+- **Typing/loading states:** skeleton + token stream cursor
+- **Answer utilities:** copy, regenerate, cite, share
+- **Composer states:** idle, focused, submitting, blocked
+- **Attachment cards:** upload progress + parse success/fail
+- **Action confirmation modal:** mandatory for side effects
+
+---
+
+## Example layout tokens (safe defaults)
+
+```css
+.chat-shell { display: grid; grid-template-columns: 280px 1fr 320px; gap: 16px; }
+.message-list { padding: 24px; max-width: 820px; margin: 0 auto; }
+.message { border-radius: 14px; padding: 12px 14px; }
+.composer { position: sticky; bottom: 0; padding: 12px; backdrop-filter: blur(8px); }
+```
+
+For mobile:
+- collapse side panels into bottom sheets
+- keep composer always visible
+- minimum 44px touch targets
+
+---
+
+## Out-of-the-box stacks for AI chat UI
+
+- **Vercel AI SDK + Next.js + shadcn/ui** (fastest modern baseline)
+- **React + Radix + Tailwind** (maximum control)
+- **Stream Chat UI** (if real-time messaging infra matters)
+
+If you want, next I’ll add a dedicated **AI chat component gallery page** with:
+- message bubbles
+- citations block
+- tool-call card
+- alert/confirmation modal
+- sticky composer patterns
