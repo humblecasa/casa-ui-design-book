@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import tailwind from '@astrojs/tailwind';
 
 // GitHub Pages config for:
 // - user: humblecasa
@@ -12,6 +13,7 @@ export default defineConfig({
   // GitHub Pages works fine with `base` alone.
   base: '/casa-ui-design-book',
   integrations: [
+    tailwind({ applyBaseStyles: false }),
     starlight({
       title: 'UI Token Guidebook',
       description:
@@ -20,7 +22,7 @@ export default defineConfig({
       social: {
         github: 'https://github.com/humblecasa/casa-ui-design-book',
       },
-      customCss: ['./src/styles/custom.css'],
+      customCss: ['./src/styles/tailwind.css', './src/styles/custom.css'],
       sidebar: [
         { label: 'Start here', items: [{ label: 'Overview', link: '/' }] },
         {
@@ -46,6 +48,18 @@ export default defineConfig({
             { label: 'Before/after UI examples', slug: 'ui-examples' },
             { label: 'AI chat UI use cases', slug: 'ai-chat-ui' },
           ],
+        },
+        {
+          label: 'Case studies',
+          items: [
+            { label: 'AI support assistant', slug: 'case-study-ai-support' },
+            { label: 'AI coding copilot panel', slug: 'case-study-ai-coding' },
+            { label: 'AI sales research workspace', slug: 'case-study-ai-sales' },
+          ],
+        },
+        {
+          label: 'Framework setup',
+          items: [{ label: 'Tailwind + shadcn quickstart', slug: 'tailwind-shadcn-setup' }],
         },
         { label: 'Product ideas', items: [{ label: 'Tool directions', slug: 'product' }] },
       ],

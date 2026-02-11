@@ -1,0 +1,34 @@
+---
+title: Case study — AI coding copilot panel
+---
+
+# Case study: Coding copilot panel for PR workflows
+
+## Problem
+- AI suggestions were hard to review
+- Engineers feared blind code changes
+
+## Design decisions
+- Split view: prompt + diff preview
+- Chunk-level approve/reject controls
+- Inline rationale for each suggested edit
+- One-click rollback after apply
+
+## UI pattern (shadcn-style composition)
+```tsx
+<Card>
+  <CardHeader>Suggested Patch</CardHeader>
+  <CardContent>{/* unified diff */}</CardContent>
+  <CardFooter>{/* Approve / Reject / Apply */}</CardFooter>
+</Card>
+```
+
+## Result metrics
+- Patch acceptance rate: +29%
+- Review cycle time: -31%
+- Reverted AI commits: -44%
+
+## Why it worked
+- Trust came from explicit review controls
+- Explanations reduced ambiguity
+- Safer apply flow lowered risk

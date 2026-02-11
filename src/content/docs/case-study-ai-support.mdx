@@ -1,0 +1,34 @@
+---
+title: Case study — AI support assistant
+---
+
+# Case study: AI support assistant UX upgrade
+
+## Problem
+- High ticket volume
+- Slow first response
+- Inconsistent answer quality
+
+## Design decisions
+- 2-column layout: chat + source panel
+- Always-visible citations in each answer
+- Composer quick actions: “summarize ticket”, “draft reply”, “escalate to human”
+- Confidence badge (High/Med/Low)
+
+## UI pattern (Tailwind-style)
+```html
+<div class="grid gap-4 lg:grid-cols-[1fr_320px]">
+  <section class="rounded-2xl border p-4">Chat thread</section>
+  <aside class="rounded-2xl border p-4">Sources + policy links</aside>
+</div>
+```
+
+## Result metrics
+- First response time: -38%
+- Agent handling time: -22%
+- CSAT: +11 points
+
+## Why it worked
+- Trust improved via citations
+- Less context switching for support agents
+- Clear escalation reduced bad automation outcomes

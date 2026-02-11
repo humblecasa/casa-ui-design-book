@@ -1,0 +1,35 @@
+---
+title: Tailwind + shadcn quickstart
+---
+
+# Tailwind + shadcn quickstart (for AI chat UIs)
+
+## What is now enabled in this site
+- Tailwind is integrated via `@astrojs/tailwind`
+- `tailwind.css` is loaded globally
+- Existing Starlight styles remain intact (`applyBaseStyles: false`)
+
+## Recommended shadcn stack
+- **Tailwind CSS** for spacing/type/color consistency
+- **Radix UI** primitives for accessibility
+- **shadcn/ui** patterns for fast, polished components
+
+## Core components to use first
+- `Button`
+- `Card`
+- `Input` + `Textarea`
+- `Dialog` (confirm external actions)
+- `Tabs` (context/source/tool panels)
+- `Tooltip` (explain model/tool behavior)
+
+## AI chat component recipe
+1. `Card` for tool output
+2. message bubbles (assistant/user/system)
+3. sticky composer row (prompt + attach + send)
+4. source citation chips below answers
+5. confirm dialog for side effects (send message, create ticket)
+
+## Why this combo works
+- Fast build velocity
+- Better default accessibility
+- Cleaner visual consistency without hand-crafting every component

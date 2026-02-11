@@ -1,0 +1,34 @@
+---
+title: Case study — AI sales research workspace
+---
+
+# Case study: AI sales research workspace
+
+## Problem
+- Reps spent too long gathering account context
+- Outputs were generic and not CRM-ready
+
+## Design decisions
+- 3-pane UI: chat, account context, output templates
+- Source recency tags on every fact
+- “Export to CRM” action on generated notes
+- Prompt chips: “Account brief”, “Competitor delta”, “Objection handling”
+
+## UI pattern (layout + action rail)
+```html
+<div class="grid gap-4 xl:grid-cols-[280px_1fr_320px]">
+  <aside>Template chips</aside>
+  <main>Conversation + generated output</main>
+  <aside>Account facts + recency</aside>
+</div>
+```
+
+## Result metrics
+- Research time per account: -47%
+- Meeting prep quality score: +26%
+- CRM note completion rate: +34%
+
+## Why it worked
+- Better context grounding
+- Faster output reuse
+- Less friction from chat to workflow system
