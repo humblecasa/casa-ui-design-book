@@ -20,8 +20,6 @@ export default defineConfig({
       social: {
         github: 'https://github.com/humblecasa/casa-ui-design-book',
       },
-      // Improves perceived speed: prefetch docs routes on intent.
-      prefetch: true,
       customCss: ['./src/styles/custom.css'],
       sidebar: [
         { label: 'Start here', items: [{ label: 'Overview', link: '/' }] },
