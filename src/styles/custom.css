@@ -148,27 +148,36 @@ button[aria-label="Menu"] svg {
 }
 
 @media (max-width: 50rem) {
-  /* Telegram/iOS in-app browsers can overlap the top bar.
-     Pin a clearly-labeled Menu button below safe-area so it's always visible. */
+  /* Telegram/iOS in-app browsers can overlap top navigation.
+     Keep a floating, labeled Menu button near bottom-left for guaranteed visibility. */
   button[aria-label="Menu"] {
     position: fixed;
-    top: calc(env(safe-area-inset-top, 0px) + 62px);
+    top: auto;
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 14px);
     left: 12px;
     right: auto;
     width: auto;
-    min-width: 44px;
-    padding: 0 10px;
+    min-width: 46px;
+    min-height: 38px;
+    padding: 0 11px;
     gap: 6px;
-    z-index: 80;
-    box-shadow: 0 8px 18px -14px rgba(15, 23, 42, 0.65);
+    z-index: 90;
+    background: #111827;
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.22);
+    box-shadow: 0 12px 28px -16px rgba(2, 6, 23, 0.9);
   }
 
   button[aria-label="Menu"]::after {
     content: "Menu";
     font-size: 12px;
-    font-weight: 650;
+    font-weight: 700;
     letter-spacing: 0.01em;
     line-height: 1;
+  }
+
+  button[aria-label="Menu"] svg {
+    color: #ffffff;
   }
 }
 
