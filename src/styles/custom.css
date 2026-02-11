@@ -147,6 +147,31 @@ button[aria-label="Menu"] svg {
   color: #111827;
 }
 
+@media (max-width: 50rem) {
+  /* Telegram/iOS in-app browsers can overlap the top bar.
+     Pin a clearly-labeled Menu button below safe-area so it's always visible. */
+  button[aria-label="Menu"] {
+    position: fixed;
+    top: calc(env(safe-area-inset-top, 0px) + 62px);
+    left: 12px;
+    right: auto;
+    width: auto;
+    min-width: 44px;
+    padding: 0 10px;
+    gap: 6px;
+    z-index: 80;
+    box-shadow: 0 8px 18px -14px rgba(15, 23, 42, 0.65);
+  }
+
+  button[aria-label="Menu"]::after {
+    content: "Menu";
+    font-size: 12px;
+    font-weight: 650;
+    letter-spacing: 0.01em;
+    line-height: 1;
+  }
+}
+
 /* Clean nav and content chrome */
 .sidebar {
   border-right: 1px solid rgba(15, 23, 42, 0.08);
