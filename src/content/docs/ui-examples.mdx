@@ -1,0 +1,129 @@
+---
+title: Before/after UI examples
+---
+
+# Before/after UI examples (no fluff)
+
+You asked for examples, not a dictionary. Here are copy-paste patterns.
+
+## 1) Link styling
+
+### ❌ Before
+```css
+a {
+  color: blue;
+  text-decoration: underline;
+}
+```
+
+### ✅ After
+```css
+.sl-markdown-content a {
+  color: #3730a3;
+  text-decoration-color: rgba(79, 70, 229, 0.4);
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.18em;
+}
+
+.sl-markdown-content a:hover {
+  color: #4338ca;
+  text-decoration-color: rgba(67, 56, 202, 0.9);
+}
+```
+
+**Result:** cleaner, premium-looking links with better hover feedback.
+
+---
+
+## 2) Button styling
+
+### ❌ Before
+```css
+button {
+  border: 1px solid #ddd;
+  background: #fff;
+  border-radius: 4px;
+}
+```
+
+### ✅ After
+```css
+button,
+.sl-link-button,
+a[role="button"] {
+  border-radius: 10px;
+  border: 1px solid rgba(79, 70, 229, 0.26);
+  background: linear-gradient(180deg, #ffffff, #f5f3ff);
+  color: #312e81;
+  font-weight: 560;
+  box-shadow: 0 2px 10px -6px rgba(79, 70, 229, 0.55);
+}
+
+button:hover,
+.sl-link-button:hover,
+a[role="button"]:hover {
+  transform: translateY(-1px);
+  border-color: rgba(79, 70, 229, 0.42);
+}
+```
+
+**Result:** less default-template feel, more polished CTA behavior.
+
+---
+
+## 3) Heading rhythm
+
+### ❌ Before
+```css
+h2 { margin: 8px 0; }
+h3 { margin: 8px 0; }
+```
+
+### ✅ After
+```css
+.sl-markdown-content h2 {
+  margin-top: clamp(2.2rem, 4vw, 3rem);
+  margin-bottom: 0.9rem;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+}
+
+.sl-markdown-content h3 {
+  margin-top: 1.5rem;
+  margin-bottom: 0.7rem;
+}
+```
+
+**Result:** headings feel intentional and easier to scan.
+
+---
+
+## 4) Page spacing rhythm
+
+### ❌ Before
+```css
+p, ul, h2, h3 { margin-top: random; }
+```
+
+### ✅ After
+```css
+.sl-markdown-content > * + * {
+  margin-top: 1rem;
+}
+
+.sl-markdown-content p {
+  max-width: 72ch;
+}
+```
+
+**Result:** consistent vertical rhythm across pages.
+
+---
+
+## Fast rule of thumb
+
+If a style change doesn’t improve these, reject it:
+- 3-second visual hierarchy
+- predictable spacing rhythm
+- clear link/button states
+- clean mobile readability

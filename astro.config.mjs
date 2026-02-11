@@ -41,7 +41,10 @@ export default defineConfig({
         },
         {
           label: 'Benchmarks',
-          items: [{ label: 'How top tech teams do design', slug: 'design-benchmarks' }],
+          items: [
+            { label: 'How top tech teams do design', slug: 'design-benchmarks' },
+            { label: 'Before/after UI examples', slug: 'ui-examples' },
+          ],
         },
         { label: 'Product ideas', items: [{ label: 'Tool directions', slug: 'product' }] },
       ],
