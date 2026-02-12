@@ -1,24 +1,176 @@
 ---
 title: Color tokens
+description: A semantic color system that works in light mode, dark mode, and everywhere in between.
 ---
 
-# Color tokens (60–30–10, but operational)
+# Color tokens
 
-Treat color as **intent**.
+Color is emotional. It guides attention, signals meaning, and defines brand. A token-based approach separates what colors mean from what they look like.
 
-## Core roles
-- `bg`, `surface`, `surface-2`
-- `text`, `text-muted`
-- `border`
-- `primary`, `on-primary`
-- `success`, `warning`, `danger`
+## Semantic vs primitive tokens
 
-## Practical 60–30–10
-- **60%**: neutral backgrounds/surfaces
-- **30%**: text + borders + secondary chrome
-- **10%**: accent (primary buttons/links/highlights)
+**Primitive tokens** are raw values:
+```css
+--gray-50: #f9fafb;
+--gray-900: #111827;
+--blue-500: #3b82f6;
+```
 
-## Rules
-- One accent hue per screen.
-- Neutrals do most of the work.
-- Add states (hover/focus/disabled) as tokens, not ad-hoc values.
+**Semantic tokens** describe intent:
+```css
+--color-background: var(--gray-50);
+--color-text: var(--gray-900);
+--color-primary: var(--blue-500);
+```
+
+Always use semantic tokens in your UI. Primitives are for defining the palette, not for direct use.
+
+## The core palette
+
+| Token | Purpose | Light mode | Dark mode |
+|-------|---------|------------|-----------|
+| `--color-background` | Page background | white | gray-900 |
+| `--color-surface` | Cards, panels | gray-50 | gray-800 |
+| `--color-border` | Dividers, outlines | gray-200 | gray-700 |
+| `--color-text` | Primary text | gray-900 | gray-50 |
+| `--color-text-muted` | Secondary text | gray-500 | gray-400 |
+| `--color-primary` | Actions, links | blue-600 | blue-400 |
+| `--color-primary-hover` | Hover states | blue-700 | blue-300 |
+
+## Functional colors
+
+For states and feedback:
+
+| Token | Purpose | Typical value |
+|-------|---------|---------------|
+| `--color-success` | Positive feedback | green-500 |
+| `--color-warning` | Caution states | amber-500 |
+| `--color-error` | Errors, destructive | red-500 |
+| `--color-info` | Informational | blue-500 |
+
+## Practical patterns
+
+### Button variants
+```css
+.button-primary {
+  background: var(--color-primary);
+  color: white;
+}
+.button-primary:hover {
+  background: var(--color-primary-hover);
+}
+.button-secondary {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+}
+.button-danger {
+  background: var(--color-error);
+  color: white;
+}
+```
+
+### Card styling
+```css
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+.card-title {
+  color: var(--color-text);
+}
+.card-description {
+  color: var(--color-text-muted);
+}
+```
+
+### Form feedback
+```css
+.input-error {
+  border-color: var(--color-error);
+}
+.helper-error {
+  color: var(--color-error);
+}
+.input-success {
+  border-color: var(--color-success);
+}
+```
+
+## Dark mode strategy
+
+Define tokens once, swap values by context:
+
+```css
+:root {
+  --color-background: #ffffff;
+  --color-text: #111827;
+  --color-surface: #f9fafb;
+}
+
+[data-theme="dark"] {
+  --color-background: #111827;
+  --color-text: #f9fafb;
+  --color-surface: #1f2937;
+}
+```
+
+Your components stay the same. Only the token values change.
+
+## Contrast requirements
+
+For accessibility (WCAG AA):
+
+- **Normal text**: 4.5:1 minimum contrast ratio
+- **Large text** (18px+ or 14px bold): 3:1 minimum
+- **UI elements**: 3:1 against adjacent colors
+
+Tools: [WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/)
+
+## Common mistakes
+
+❌ **Hardcoded colors**: `color: #374151` scattered everywhere  
+✅ **Use tokens**: `color: var(--color-text-muted)`
+
+❌ **Too many colors**: Rainbow explosion  
+✅ **Minimal palette**: 1 primary + grays + 3 functional colors
+
+❌ **Low contrast text**: Gray on light gray  
+✅ **Test contrast**: Every text must pass WCAG
+
+❌ **Color as only signal**: Red for errors, nothing else  
+✅ **Multiple signals**: Color + icon + text for accessibility
+
+## Tailwind mapping
+
+```js
+// tailwind.config.js
+module.exports = {
+  theme: {
+    colors: {
+      background: 'var(--color-background)',
+      surface: 'var(--color-surface)',
+      border: 'var(--color-border)',
+      text: {
+        DEFAULT: 'var(--color-text)',
+        muted: 'var(--color-text-muted)',
+      },
+      primary: {
+        DEFAULT: 'var(--color-primary)',
+        hover: 'var(--color-primary-hover)',
+      },
+      success: 'var(--color-success)',
+      warning: 'var(--color-warning)',
+      error: 'var(--color-error)',
+    }
+  }
+}
+```
+
+## Quick checklist
+
+- [ ] Using semantic tokens (not raw hex values)?
+- [ ] Dark mode swaps values, not token names?
+- [ ] All text passes contrast requirements?
+- [ ] Functional colors have consistent meaning?
+- [ ] Color is never the only way to convey information?

@@ -1,25 +1,188 @@
 ---
 title: Component sizing defaults
+description: Consistent sizing tokens for buttons, inputs, and interactive elements.
 ---
 
 # Component sizing defaults
 
-Stop inventing heights. Pick a ramp and reuse it.
+When every button is a different size, your UI looks like it was assembled by committee. Consistent component sizing creates visual harmony and reduces decision fatigue.
 
-## Control heights
-- `control-sm`: 32
-- `control-md`: 40 (default)
-- `control-lg`: 48
+## Size scale
 
-## Icons
-- `icon-sm`: 16
-- `icon-md`: 20 (default)
-- `icon-lg`: 24
+Three sizes cover 95% of use cases:
 
-## Radius
-- `radius-sm`: 6
-- `radius-md`: 10 (default)
-- `radius-lg`: 14
+| Size | Height | Padding X | Font size | Use case |
+|------|--------|-----------|-----------|----------|
+| `sm` | 32px | 12px | 14px | Dense UIs, tables, secondary actions |
+| `md` | 40px | 16px | 14px | Default for most contexts |
+| `lg` | 48px | 20px | 16px | Primary CTAs, hero sections |
 
-## Rule
-Every component chooses `sm/md/lg`. If you need a new size, add it as a token intentionally.
+## Button tokens
+
+```css
+.button-sm {
+  height: 32px;
+  padding: 0 12px;
+  font-size: 14px;
+  border-radius: 6px;
+}
+.button-md {
+  height: 40px;
+  padding: 0 16px;
+  font-size: 14px;
+  border-radius: 8px;
+}
+.button-lg {
+  height: 48px;
+  padding: 0 20px;
+  font-size: 16px;
+  border-radius: 8px;
+}
+```
+
+### Icon buttons
+
+Square variants for icon-only buttons:
+
+| Size | Dimensions | Icon size |
+|------|------------|-----------|
+| `sm` | 32×32px | 16px |
+| `md` | 40×40px | 20px |
+| `lg` | 48×48px | 24px |
+
+## Input tokens
+
+Inputs should match button heights for alignment:
+
+```css
+.input-sm {
+  height: 32px;
+  padding: 0 12px;
+  font-size: 14px;
+}
+.input-md {
+  height: 40px;
+  padding: 0 12px;
+  font-size: 14px;
+}
+.input-lg {
+  height: 48px;
+  padding: 0 16px;
+  font-size: 16px;
+}
+```
+
+### Textarea sizing
+```css
+.textarea {
+  min-height: 80px;
+  padding: 12px;
+  font-size: 14px;
+}
+```
+
+## Avatar tokens
+
+| Size | Dimensions | Use case |
+|------|------------|----------|
+| `xs` | 24px | Inline mentions, dense lists |
+| `sm` | 32px | Comments, table rows |
+| `md` | 40px | Cards, headers |
+| `lg` | 48px | Profile sections |
+| `xl` | 64px | Profile pages, hero |
+
+## Badge/chip tokens
+
+```css
+.badge {
+  height: 20px;
+  padding: 0 6px;
+  font-size: 12px;
+  border-radius: 4px;
+}
+.badge-lg {
+  height: 24px;
+  padding: 0 8px;
+  font-size: 12px;
+  border-radius: 6px;
+}
+```
+
+## Practical alignment patterns
+
+### Form row (label + input + button)
+```html
+<div class="flex items-center gap-3">
+  <label class="text-sm">Email</label>
+  <input class="input-md flex-1" />
+  <button class="button-md">Subscribe</button>
+</div>
+```
+
+All elements share the same 40px height → perfect alignment.
+
+### Table actions
+```html
+<td class="flex gap-2">
+  <button class="button-sm">Edit</button>
+  <button class="button-sm">Delete</button>
+</td>
+```
+
+Small buttons for dense table contexts.
+
+### Hero CTA
+```html
+<div class="flex gap-4">
+  <button class="button-lg button-primary">Get Started</button>
+  <button class="button-lg button-secondary">Learn More</button>
+</div>
+```
+
+Large buttons command attention.
+
+## Border radius scale
+
+Match radius to component size:
+
+| Component size | Border radius |
+|---------------|---------------|
+| Small (32px) | 6px |
+| Medium (40px) | 8px |
+| Large (48px) | 8-12px |
+| Cards/panels | 12px |
+| Modals | 16px |
+
+## Common mistakes
+
+❌ **Mismatched heights**: Button is 36px, input is 40px  
+✅ **Use the scale**: Both use `md` (40px)
+
+❌ **Arbitrary sizes**: Button padding of 13px  
+✅ **Stick to tokens**: 12px, 16px, or 20px
+
+❌ **Only one size**: Everything is medium  
+✅ **Size by context**: Dense UIs get `sm`, heroes get `lg`
+
+## Tailwind implementation
+
+```js
+// tailwind.config.js
+module.exports = {
+  theme: {
+    extend: {
+      height: {
+        'btn-sm': '32px',
+        'btn-md': '40px',
+        'btn-lg': '48px',
+      }
+    }
+  }
+}
+```
+
+Or use arbitrary values: `h-[40px]` when needed.
+
+## The golden rule
+
+**Same context = same size.** If two buttons sit next to each other, they should be the same size. If an input and button are in the same row, they should be the same height.

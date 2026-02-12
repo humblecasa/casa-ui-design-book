@@ -1,0 +1,233 @@
+<!DOCTYPE html><html lang="en" dir="ltr" data-has-toc data-has-sidebar data-theme="dark" class="astro-bguv2lll"> <head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Pre-coding workflow | UI Token Guidebook</title><link rel="canonical"/><link rel="shortcut icon" href="/casa-ui-design-book/favicon.svg" type="image/svg+xml"/><meta name="generator" content="Astro v4.16.19"/><meta name="generator" content="Starlight v0.28.6"/><meta property="og:title" content="Pre-coding workflow"/><meta property="og:type" content="article"/><meta property="og:url"/><meta property="og:locale" content="en"/><meta property="og:description" content="A systematic process for UI decisions that eliminates guesswork before you write code."/><meta property="og:site_name" content="UI Token Guidebook"/><meta name="twitter:card" content="summary_large_image"/><meta name="description" content="A systematic process for UI decisions that eliminates guesswork before you write code."/><script>
+	window.StarlightThemeProvider = (() => {
+		const storedTheme =
+			typeof localStorage !== 'undefined' && localStorage.getItem('starlight-theme');
+		const theme =
+			storedTheme ||
+			(window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+		document.documentElement.dataset.theme = theme === 'light' ? 'light' : 'dark';
+		return {
+			updatePickers(theme = storedTheme || 'auto') {
+				document.querySelectorAll('starlight-theme-select').forEach((picker) => {
+					const select = picker.querySelector('select');
+					if (select) select.value = theme;
+					/** @type {HTMLTemplateElement | null} */
+					const tmpl = document.querySelector(`#theme-icons`);
+					const newIcon = tmpl && tmpl.content.querySelector('.' + theme);
+					if (newIcon) {
+						const oldIcon = picker.querySelector('svg.label-icon');
+						if (oldIcon) {
+							oldIcon.replaceChildren(...newIcon.cloneNode(true).childNodes);
+						}
+					}
+				});
+			},
+		};
+	})();
+</script><template id="theme-icons"><svg aria-hidden="true" class="light astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M5 12a1 1 0 0 0-1-1H3a1 1 0 0 0 0 2h1a1 1 0 0 0 1-1Zm.64 5-.71.71a1 1 0 0 0 0 1.41 1 1 0 0 0 1.41 0l.71-.71A1 1 0 0 0 5.64 17ZM12 5a1 1 0 0 0 1-1V3a1 1 0 0 0-2 0v1a1 1 0 0 0 1 1Zm5.66 2.34a1 1 0 0 0 .7-.29l.71-.71a1 1 0 1 0-1.41-1.41l-.66.71a1 1 0 0 0 0 1.41 1 1 0 0 0 .66.29Zm-12-.29a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.71-.71a1.004 1.004 0 1 0-1.43 1.41l.73.71ZM21 11h-1a1 1 0 0 0 0 2h1a1 1 0 0 0 0-2Zm-2.64 6A1 1 0 0 0 17 18.36l.71.71a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.76-.66ZM12 6.5a5.5 5.5 0 1 0 5.5 5.5A5.51 5.51 0 0 0 12 6.5Zm0 9a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Zm0 3.5a1 1 0 0 0-1 1v1a1 1 0 0 0 2 0v-1a1 1 0 0 0-1-1Z"/></svg> <svg aria-hidden="true" class="dark astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21.64 13a1 1 0 0 0-1.05-.14 8.049 8.049 0 0 1-3.37.73 8.15 8.15 0 0 1-8.14-8.1 8.59 8.59 0 0 1 .25-2A1 1 0 0 0 8 2.36a10.14 10.14 0 1 0 14 11.69 1 1 0 0 0-.36-1.05Zm-9.5 6.69A8.14 8.14 0 0 1 7.08 5.22v.27a10.15 10.15 0 0 0 10.14 10.14 9.784 9.784 0 0 0 2.1-.22 8.11 8.11 0 0 1-7.18 4.32v-.04Z"/></svg> <svg aria-hidden="true" class="auto astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg> </template><link rel="stylesheet" href="/casa-ui-design-book/_astro/index.iioQ4Mml.css"><script type="module" src="/casa-ui-design-book/_astro/hoisted.4s8oj5OF.js"></script>
+<script type="module" src="/casa-ui-design-book/_astro/page.7qqag-5g.js"></script></head> <body class="astro-bguv2lll"> <a href="#_top" class="astro-7q3lir66">Skip to content</a>  <div class="page sl-flex astro-vrdttmbt"> <header class="header astro-vrdttmbt"><div class="header sl-flex astro-kmkmnagf"> <div class="title-wrapper sl-flex astro-kmkmnagf"> <a href="/casa-ui-design-book/" class="site-title sl-flex astro-m46x6ez3">  <span class="astro-m46x6ez3"> UI Token Guidebook </span> </a>  </div> <div class="sl-flex astro-kmkmnagf"> <site-search data-translations="{&#34;placeholder&#34;:&#34;Search&#34;}" class="astro-v37mnknz"> <button data-open-modal disabled aria-label="Search" aria-keyshortcuts="Control+K" class="astro-v37mnknz"> <svg aria-hidden="true" class="astro-v37mnknz astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21.71 20.29 18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a.999.999 0 0 0 1.42 0 1 1 0 0 0 0-1.39ZM11 18a7 7 0 1 1 0-14 7 7 0 0 1 0 14Z"/></svg>  <span class="sl-hidden md:sl-block astro-v37mnknz" aria-hidden="true">Search</span> <kbd class="sl-hidden md:sl-flex astro-v37mnknz" style="display: none;"> <kbd class="astro-v37mnknz">Ctrl</kbd><kbd class="astro-v37mnknz">K</kbd> </kbd> </button> <dialog style="padding:0" aria-label="Search" class="astro-v37mnknz"> <div class="dialog-frame sl-flex astro-v37mnknz">  <button data-close-modal class="sl-flex md:sl-hidden astro-v37mnknz"> Cancel </button> <div class="search-container astro-v37mnknz"> <div id="starlight__search" class="astro-v37mnknz"></div> </div> </div> </dialog> </site-search>  <script>
+	(() => {
+		const openBtn = document.querySelector('button[data-open-modal]');
+		const shortcut = openBtn?.querySelector('kbd');
+		if (!openBtn || !(shortcut instanceof HTMLElement)) return;
+		const platformKey = shortcut.querySelector('kbd');
+		if (platformKey && /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform)) {
+			platformKey.textContent = '⌘';
+			openBtn.setAttribute('aria-keyshortcuts', 'Meta+K');
+		}
+		shortcut.style.display = '';
+	})();
+</script>    </div> <div class="sl-hidden md:sl-flex right-group astro-kmkmnagf"> <div class="sl-flex social-icons astro-kmkmnagf"> <a href="https://github.com/humblecasa/casa-ui-design-book" rel="me" class="sl-flex astro-wy4te6ga"><span class="sr-only astro-wy4te6ga">GitHub</span><svg aria-hidden="true" class="astro-wy4te6ga astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.08 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3Z"/></svg> </a> </div> <starlight-theme-select>  <label style="--sl-select-width: 6.25em" class="astro-4yphtoen"> <span class="sr-only astro-4yphtoen">Select theme</span> <svg aria-hidden="true" class="icon label-icon astro-4yphtoen astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg>  <select value="auto" class="astro-4yphtoen"> <option value="dark" class="astro-4yphtoen">Dark</option><option value="light" class="astro-4yphtoen">Light</option><option value="auto" selected class="astro-4yphtoen">Auto</option> </select> <svg aria-hidden="true" class="icon caret astro-4yphtoen astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg>  </label>  </starlight-theme-select>  <script>
+	StarlightThemeProvider.updatePickers();
+</script>   </div> </div> </header> <nav class="sidebar astro-vrdttmbt" aria-label="Main"> <starlight-menu-button class="astro-jif73yzw"> <button aria-expanded="false" aria-label="Menu" aria-controls="starlight__sidebar" class="sl-flex md:sl-hidden astro-jif73yzw"> <svg aria-hidden="true" class="astro-jif73yzw astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M3 8h18a1 1 0 1 0 0-2H3a1 1 0 0 0 0 2Zm18 8H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Zm0-5H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Z"/></svg>  </button> </starlight-menu-button>    <div id="starlight__sidebar" class="sidebar-pane astro-vrdttmbt"> <div class="sidebar-content sl-flex astro-vrdttmbt"> <sl-sidebar-state-persist data-hash="0rwm7kg" class="astro-kku4brbg"> <script>
+		(() => {
+			try {
+				if (!matchMedia('(min-width: 50em)').matches) return;
+				/** @type {HTMLElement | null} */
+				const target = document.querySelector('sl-sidebar-state-persist');
+				const state = JSON.parse(sessionStorage.getItem('sl-sidebar-state') || '0');
+				if (!target || !state || target.dataset.hash !== state.hash) return;
+				window._starlightScrollRestore = state.scroll;
+				customElements.define(
+					'sl-sidebar-restore',
+					class SidebarRestore extends HTMLElement {
+						connectedCallback() {
+							try {
+								const idx = parseInt(this.dataset.index || '');
+								const details = this.closest('details');
+								if (details && typeof state.open[idx] === 'boolean') details.open = state.open[idx];
+							} catch {}
+						}
+					}
+				);
+			} catch {}
+		})();
+	</script>  <ul class="top-level astro-3ii7xxms"> <li class="astro-3ii7xxms"> <details open class="astro-3ii7xxms"> <sl-sidebar-restore data-index="0"></sl-sidebar-restore> <summary class="astro-3ii7xxms"> <div class="group-label astro-3ii7xxms"> <span class="large astro-3ii7xxms">Start here</span>  </div> <svg aria-hidden="true" class="caret astro-3ii7xxms astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg>  </summary> <ul class="astro-3ii7xxms"> <li class="astro-3ii7xxms"> <a href="/casa-ui-design-book/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Overview</span>  </a> </li> </ul>  </details> </li><li class="astro-3ii7xxms"> <details open class="astro-3ii7xxms"> <sl-sidebar-restore data-index="1"></sl-sidebar-restore> <summary class="astro-3ii7xxms"> <div class="group-label astro-3ii7xxms"> <span class="large astro-3ii7xxms">System</span>  </div> <svg aria-hidden="true" class="caret astro-3ii7xxms astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg>  </summary> <ul class="astro-3ii7xxms"> <li class="astro-3ii7xxms"> <a href="/casa-ui-design-book/spacing" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Spacing tokens</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/casa-ui-design-book/typography" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Typography tokens</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/casa-ui-design-book/color" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Color tokens</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/casa-ui-design-book/components" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Component sizing defaults</span>  </a> </li> </ul>  </details> </li><li class="astro-3ii7xxms"> <details open class="astro-3ii7xxms"> <sl-sidebar-restore data-index="2"></sl-sidebar-restore> <summary class="astro-3ii7xxms"> <div class="group-label astro-3ii7xxms"> <span class="large astro-3ii7xxms">Workflow</span>  </div> <svg aria-hidden="true" class="caret astro-3ii7xxms astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg>  </summary> <ul class="astro-3ii7xxms"> <li class="astro-3ii7xxms"> <a href="/casa-ui-design-book/workflow" aria-current="page" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Pre-coding workflow</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/casa-ui-design-book/checklist" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Checklist</span>  </a> </li> </ul>  </details> </li><li class="astro-3ii7xxms"> <details open class="astro-3ii7xxms"> <sl-sidebar-restore data-index="3"></sl-sidebar-restore> <summary class="astro-3ii7xxms"> <div class="group-label astro-3ii7xxms"> <span class="large astro-3ii7xxms">Benchmarks</span>  </div> <svg aria-hidden="true" class="caret astro-3ii7xxms astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg>  </summary> <ul class="astro-3ii7xxms"> <li class="astro-3ii7xxms"> <a href="/casa-ui-design-book/design-benchmarks" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">How top tech teams do design</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/casa-ui-design-book/ui-examples" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Before/after UI examples</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/casa-ui-design-book/ai-chat-ui" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">AI chat UI use cases</span>  </a> </li> </ul>  </details> </li><li class="astro-3ii7xxms"> <details open class="astro-3ii7xxms"> <sl-sidebar-restore data-index="4"></sl-sidebar-restore> <summary class="astro-3ii7xxms"> <div class="group-label astro-3ii7xxms"> <span class="large astro-3ii7xxms">Case studies</span>  </div> <svg aria-hidden="true" class="caret astro-3ii7xxms astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg>  </summary> <ul class="astro-3ii7xxms"> <li class="astro-3ii7xxms"> <a href="/casa-ui-design-book/case-study-ai-support" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">AI support assistant</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/casa-ui-design-book/case-study-ai-coding" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">AI coding copilot panel</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/casa-ui-design-book/case-study-ai-sales" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">AI sales research workspace</span>  </a> </li> </ul>  </details> </li><li class="astro-3ii7xxms"> <details open class="astro-3ii7xxms"> <sl-sidebar-restore data-index="5"></sl-sidebar-restore> <summary class="astro-3ii7xxms"> <div class="group-label astro-3ii7xxms"> <span class="large astro-3ii7xxms">Framework setup</span>  </div> <svg aria-hidden="true" class="caret astro-3ii7xxms astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg>  </summary> <ul class="astro-3ii7xxms"> <li class="astro-3ii7xxms"> <a href="/casa-ui-design-book/tailwind-shadcn-setup" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Tailwind + shadcn quickstart</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/casa-ui-design-book/ai-chat-component-gallery" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">AI chat component gallery</span>  </a> </li> </ul>  </details> </li><li class="astro-3ii7xxms"> <details open class="astro-3ii7xxms"> <sl-sidebar-restore data-index="6"></sl-sidebar-restore> <summary class="astro-3ii7xxms"> <div class="group-label astro-3ii7xxms"> <span class="large astro-3ii7xxms">Product ideas</span>  </div> <svg aria-hidden="true" class="caret astro-3ii7xxms astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg>  </summary> <ul class="astro-3ii7xxms"> <li class="astro-3ii7xxms"> <a href="/casa-ui-design-book/product" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Tool directions</span>  </a> </li> </ul>  </details> </li> </ul>   <script>
+		(() => {
+			const scroller = document.getElementById('starlight__sidebar');
+			if (!window._starlightScrollRestore || !scroller) return;
+			scroller.scrollTop = window._starlightScrollRestore;
+			delete window._starlightScrollRestore;
+		})();
+	</script> </sl-sidebar-state-persist>  <div class="md:sl-hidden"> <div class="mobile-preferences sl-flex astro-wu23bvmt"> <div class="sl-flex social-icons astro-wu23bvmt"> <a href="https://github.com/humblecasa/casa-ui-design-book" rel="me" class="sl-flex astro-wy4te6ga"><span class="sr-only astro-wy4te6ga">GitHub</span><svg aria-hidden="true" class="astro-wy4te6ga astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.08 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3Z"/></svg> </a> </div> <starlight-theme-select>  <label style="--sl-select-width: 6.25em" class="astro-4yphtoen"> <span class="sr-only astro-4yphtoen">Select theme</span> <svg aria-hidden="true" class="icon label-icon astro-4yphtoen astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg>  <select value="auto" class="astro-4yphtoen"> <option value="dark" class="astro-4yphtoen">Dark</option><option value="light" class="astro-4yphtoen">Light</option><option value="auto" selected class="astro-4yphtoen">Auto</option> </select> <svg aria-hidden="true" class="icon caret astro-4yphtoen astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg>  </label>  </starlight-theme-select>  <script>
+	StarlightThemeProvider.updatePickers();
+</script>   </div>  </div> </div> </div> </nav> <div class="main-frame astro-vrdttmbt">   <div class="lg:sl-flex astro-67yu43on"> <aside class="right-sidebar-container astro-67yu43on"> <div class="right-sidebar astro-67yu43on"> <div class="lg:sl-hidden astro-pb3aqygn"><mobile-starlight-toc data-min-h="2" data-max-h="3" class="astro-doynk5tl"><nav aria-labelledby="starlight__on-this-page--mobile" class="astro-doynk5tl"><details id="starlight__mobile-toc" class="astro-doynk5tl"><summary id="starlight__on-this-page--mobile" class="sl-flex astro-doynk5tl"><div class="toggle sl-flex astro-doynk5tl">On this page<svg aria-hidden="true" class="caret astro-doynk5tl astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg> </div><span class="display-current astro-doynk5tl"></span></summary><div class="dropdown astro-doynk5tl"><ul class="isMobile astro-g2bywc46" style="--depth: 0;"> <li class="astro-g2bywc46" style="--depth: 0;"> <a href="#_top" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">Overview</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#the-4-step-process" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">The 4-step process</span> </a> <ul class="isMobile astro-g2bywc46" style="--depth: 1;"> <li class="astro-g2bywc46" style="--depth: 1;"> <a href="#step-1-content-inventory-10-min" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Step 1: Content inventory (10 min)</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#step-2-hierarchy-mapping-10-min" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Step 2: Hierarchy mapping (10 min)</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#step-3-token-selection-15-min" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Step 3: Token selection (15 min)</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#step-4-state-documentation-10-min" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Step 4: State documentation (10 min)</span> </a>  </li> </ul>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#putting-it-together" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">Putting it together</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#time-investment" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">Time investment</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#common-shortcuts-and-why-they-fail" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">Common shortcuts (and why they fail)</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#when-to-skip-this" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">When to skip this</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#template" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">Template</span> </a>  </li> </ul> </div></details></nav></mobile-starlight-toc></div><div class="right-sidebar-panel sl-hidden lg:sl-block astro-pb3aqygn"><div class="sl-container astro-pb3aqygn"><starlight-toc data-min-h="2" data-max-h="3"><nav aria-labelledby="starlight__on-this-page"><h2 id="starlight__on-this-page">On this page</h2><ul class="astro-g2bywc46" style="--depth: 0;"> <li class="astro-g2bywc46" style="--depth: 0;"> <a href="#_top" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">Overview</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#the-4-step-process" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">The 4-step process</span> </a> <ul class="astro-g2bywc46" style="--depth: 1;"> <li class="astro-g2bywc46" style="--depth: 1;"> <a href="#step-1-content-inventory-10-min" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Step 1: Content inventory (10 min)</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#step-2-hierarchy-mapping-10-min" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Step 2: Hierarchy mapping (10 min)</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#step-3-token-selection-15-min" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Step 3: Token selection (15 min)</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#step-4-state-documentation-10-min" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Step 4: State documentation (10 min)</span> </a>  </li> </ul>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#putting-it-together" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">Putting it together</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#time-investment" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">Time investment</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#common-shortcuts-and-why-they-fail" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">Common shortcuts (and why they fail)</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#when-to-skip-this" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">When to skip this</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#template" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">Template</span> </a>  </li> </ul> </nav></starlight-toc></div></div> </div> </aside> <div class="main-pane astro-67yu43on">  <main data-pagefind-body lang="en" dir="ltr" class="astro-bguv2lll">    <div class="content-panel astro-7nkwcw3z"> <div class="sl-container astro-7nkwcw3z"> <h1 id="_top" class="astro-j6tvhyss">Pre-coding workflow</h1>  </div> </div>  <div class="content-panel astro-7nkwcw3z"> <div class="sl-container astro-7nkwcw3z"> <div class="sl-markdown-content"> <h1 id="pre-coding-workflow">Pre-coding workflow</h1>
+<p>The worst time to make design decisions is while you’re coding. You’re in implementation mode, not design mode. Decisions get made by accident. Inconsistencies creep in.</p>
+<p>This workflow front-loads the thinking so coding becomes execution.</p>
+<h2 id="the-4-step-process">The 4-step process</h2>
+<h3 id="step-1-content-inventory-10-min">Step 1: Content inventory (10 min)</h3>
+<p>Before touching layout, list everything that needs to be on the screen:</p>
+<p><strong>Example: User profile page</strong></p>
+<div class="expressive-code"><link rel="stylesheet" href="/casa-ui-design-book/_astro/ec.j8ofn.css"><script type="module" src="/casa-ui-design-book/_astro/ec.8zarh.js"></script><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="plaintext"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">- Avatar (editable)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">- Display name</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">- Email (verified badge)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">- Bio (optional, 160 char max)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">- Join date</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">- Plan type (Free/Pro/Team)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">- Usage stats (3 metrics)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">- Edit button</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">- Upgrade CTA (if Free)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">- Danger zone (delete account)</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="- Avatar (editable)- Display name- Email (verified badge)- Bio (optional, 160 char max)- Join date- Plan type (Free/Pro/Team)- Usage stats (3 metrics)- Edit button- Upgrade CTA (if Free)- Danger zone (delete account)"><div></div></button></div></figure></div>
+<p>No hierarchy yet. Just what exists.</p>
+<p><strong>Why this matters</strong>: You can’t design what you haven’t defined. Missing elements surface here, not during code review.</p>
+<h3 id="step-2-hierarchy-mapping-10-min">Step 2: Hierarchy mapping (10 min)</h3>
+<p>Rank by importance (1 = most important):</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="plaintext"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">1. Display name, avatar (identity)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">2. Plan type, usage stats (status)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">3. Email, bio (details)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">4. Edit, upgrade (actions)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">5. Join date (metadata)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">6. Delete account (rare, dangerous)</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="1. Display name, avatar (identity)2. Plan type, usage stats (status)3. Email, bio (details)4. Edit, upgrade (actions)5. Join date (metadata)6. Delete account (rare, dangerous)"><div></div></button></div></figure></div>
+<p>Now assign visual weight:</p>
+<ul>
+<li>Level 1-2: Large, prominent</li>
+<li>Level 3-4: Normal, clear</li>
+<li>Level 5-6: Small, subtle</li>
+</ul>
+<p><strong>Why this matters</strong>: Hierarchy prevents “everything is equally important” layouts. Users know where to look.</p>
+<h3 id="step-3-token-selection-15-min">Step 3: Token selection (15 min)</h3>
+<p>Map each element to design tokens:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Element</th><th>Typography</th><th>Spacing</th><th>Color</th></tr></thead><tbody><tr><td>Display name</td><td><code dir="auto">--text-2xl</code>, semibold</td><td><code dir="auto">--space-2</code> below</td><td><code dir="auto">--color-text</code></td></tr><tr><td>Avatar</td><td>64px</td><td><code dir="auto">--space-4</code> right</td><td>-</td></tr><tr><td>Plan badge</td><td><code dir="auto">--text-xs</code>, medium</td><td><code dir="auto">--space-1</code> padding</td><td>Primary for Pro</td></tr><tr><td>Section gap</td><td>-</td><td><code dir="auto">--space-8</code></td><td>-</td></tr><tr><td>Danger zone</td><td><code dir="auto">--text-sm</code></td><td><code dir="auto">--space-6</code> top</td><td>Error color</td></tr></tbody></table>
+<p>Every choice references a token. No magic numbers.</p>
+<p><strong>Why this matters</strong>: Consistency is automatic when you use the same tokens everywhere.</p>
+<h3 id="step-4-state-documentation-10-min">Step 4: State documentation (10 min)</h3>
+<p>List all possible states:</p>
+<p><strong>Loading</strong></p>
+<ul>
+<li>Skeleton for avatar, name, stats</li>
+<li>Disabled edit button</li>
+</ul>
+<p><strong>Empty states</strong></p>
+<ul>
+<li>No bio: “Add a bio to tell people about yourself”</li>
+<li>No usage: “Start using the product to see stats”</li>
+</ul>
+<p><strong>Error states</strong></p>
+<ul>
+<li>Avatar upload failed: inline error + retry</li>
+<li>Save failed: toast + retry button</li>
+</ul>
+<p><strong>Edge cases</strong></p>
+<ul>
+<li>Very long name: truncate with ellipsis</li>
+<li>Missing email verification: warning banner</li>
+</ul>
+<p><strong>Why this matters</strong>: States that aren’t designed become bugs. Document them upfront.</p>
+<h2 id="putting-it-together">Putting it together</h2>
+<p>Your pre-coding artifact should look like this:</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="markdown"><code><div class="ec-line"><div class="code"><span style="--0:#82B1FF;--1:#3C63B3"># Profile Page - Design Spec</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#82B1FF;--1:#3C63B3">## Content</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D9F5DD;--1:#111111">-</span><span style="--0:#D6DEEB;--1:#403F53"> Avatar (64px, editable)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D9F5DD;--1:#111111">-</span><span style="--0:#D6DEEB;--1:#403F53"> Display name (--text-2xl)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D9F5DD;--1:#111111">-</span><span style="--0:#D6DEEB;--1:#403F53"> Email + verified badge</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D9F5DD;--1:#111111">-</span><span style="--0:#D6DEEB;--1:#403F53"> Bio (--text-base, muted if empty)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D9F5DD;--1:#111111">-</span><span style="--0:#D6DEEB;--1:#403F53"> Plan badge (Pro = primary color)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D9F5DD;--1:#111111">-</span><span style="--0:#D6DEEB;--1:#403F53"> Stats: 3 cards, --space-4 gap</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D9F5DD;--1:#111111">-</span><span style="--0:#D6DEEB;--1:#403F53"> Actions: Edit (secondary), Upgrade (primary)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D9F5DD;--1:#111111">-</span><span style="--0:#D6DEEB;--1:#403F53"> Danger zone: --space-8 separation</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#82B1FF;--1:#3C63B3">## States</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D9F5DD;--1:#111111">-</span><span style="--0:#D6DEEB;--1:#403F53"> Loading: skeleton loader</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D9F5DD;--1:#111111">-</span><span style="--0:#D6DEEB;--1:#403F53"> Empty bio: placeholder CTA</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D9F5DD;--1:#111111">-</span><span style="--0:#D6DEEB;--1:#403F53"> Free plan: show upgrade CTA</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D9F5DD;--1:#111111">-</span><span style="--0:#D6DEEB;--1:#403F53"> Pro plan: hide upgrade CTA</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#82B1FF;--1:#3C63B3">## Mobile adaptations</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D9F5DD;--1:#111111">-</span><span style="--0:#D6DEEB;--1:#403F53"> Stats stack vertically</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D9F5DD;--1:#111111">-</span><span style="--0:#D6DEEB;--1:#403F53"> Avatar shrinks to 48px</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D9F5DD;--1:#111111">-</span><span style="--0:#D6DEEB;--1:#403F53"> Danger zone in collapsible</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="# Profile Page - Design Spec## Content- Avatar (64px, editable)- Display name (--text-2xl)- Email + verified badge- Bio (--text-base, muted if empty)- Plan badge (Pro = primary color)- Stats: 3 cards, --space-4 gap- Actions: Edit (secondary), Upgrade (primary)- Danger zone: --space-8 separation## States- Loading: skeleton loader- Empty bio: placeholder CTA- Free plan: show upgrade CTA- Pro plan: hide upgrade CTA## Mobile adaptations- Stats stack vertically- Avatar shrinks to 48px- Danger zone in collapsible"><div></div></button></div></figure></div>
+<p>This becomes your checklist during implementation.</p>
+<h2 id="time-investment">Time investment</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Step</th><th>Time</th><th>Output</th></tr></thead><tbody><tr><td>Content inventory</td><td>10 min</td><td>Complete element list</td></tr><tr><td>Hierarchy mapping</td><td>10 min</td><td>Priority ranking</td></tr><tr><td>Token selection</td><td>15 min</td><td>Token-to-element mapping</td></tr><tr><td>State documentation</td><td>10 min</td><td>All states listed</td></tr><tr><td><strong>Total</strong></td><td><strong>45 min</strong></td><td>Complete design spec</td></tr></tbody></table>
+<p>45 minutes of planning saves hours of “hmm, what size should this be?” and rework.</p>
+<h2 id="common-shortcuts-and-why-they-fail">Common shortcuts (and why they fail)</h2>
+<p>❌ <strong>“I’ll figure it out while coding”</strong><br>
+Result: Inconsistent spacing, missed states, rework</p>
+<p>❌ <strong>“The design is in my head”</strong><br>
+Result: Details forgotten, different interpretation by others</p>
+<p>❌ <strong>“Let’s just use what we did last time”</strong><br>
+Result: Copy-paste without thinking, doesn’t fit new context</p>
+<p>❌ <strong>“We don’t have time for this”</strong><br>
+Result: Spend 3x the time fixing issues later</p>
+<h2 id="when-to-skip-this">When to skip this</h2>
+<p>You can abbreviate the process for:</p>
+<ul>
+<li><strong>Tiny changes</strong>: Single button text change</li>
+<li><strong>Exact replication</strong>: Copying an existing component verbatim</li>
+<li><strong>Prototypes</strong>: Throwaway explorations</li>
+</ul>
+<p>But for any new screen or significant feature, do the work.</p>
+<h2 id="template">Template</h2>
+<p>Copy this for every new screen:</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="markdown"><code><div class="ec-line"><div class="code"><span style="--0:#82B1FF;--1:#3C63B3"># [Screen Name] - Design Spec</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#82B1FF;--1:#3C63B3">## Content inventory</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">-</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#82B1FF;--1:#3C63B3">## Hierarchy (1=highest)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">1.</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">2.</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">3.</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#82B1FF;--1:#3C63B3">## Token mapping</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">| Element | Typography | Spacing | Color |</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#82B1FF;--1:#3C63B3">## States</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D9F5DD;--1:#111111">-</span><span style="--0:#D6DEEB;--1:#403F53"> Loading:</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D9F5DD;--1:#111111">-</span><span style="--0:#D6DEEB;--1:#403F53"> Empty:</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D9F5DD;--1:#111111">-</span><span style="--0:#D6DEEB;--1:#403F53"> Error:</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D9F5DD;--1:#111111">-</span><span style="--0:#D6DEEB;--1:#403F53"> Edge cases:</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#82B1FF;--1:#3C63B3">## Mobile adaptations</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">-</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="# [Screen Name] - Design Spec## Content inventory-## Hierarchy (1=highest)1.2.3.## Token mapping| Element | Typography | Spacing | Color |## States- Loading:- Empty:- Error:- Edge cases:## Mobile adaptations-"><div></div></button></div></figure></div>
+<p>Fill it in before opening your code editor. Your future self will thank you.</p> </div> <footer class="sl-flex astro-3yyafb3n"> <div class="meta sl-flex astro-3yyafb3n">   </div> <div class="pagination-links astro-u2l5gyhi" dir="ltr"> <a href="/casa-ui-design-book/components" rel="prev" class="astro-u2l5gyhi"> <svg aria-hidden="true" class="astro-u2l5gyhi astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.5rem;"><path d="M17 11H9.41l3.3-3.29a1.004 1.004 0 1 0-1.42-1.42l-5 5a1 1 0 0 0-.21.33 1 1 0 0 0 0 .76 1 1 0 0 0 .21.33l5 5a1.002 1.002 0 0 0 1.639-.325 1 1 0 0 0-.219-1.095L9.41 13H17a1 1 0 0 0 0-2Z"/></svg>  <span class="astro-u2l5gyhi"> Previous <br class="astro-u2l5gyhi"> <span class="link-title astro-u2l5gyhi">Component sizing defaults</span> </span> </a> <a href="/casa-ui-design-book/checklist" rel="next" class="astro-u2l5gyhi"> <svg aria-hidden="true" class="astro-u2l5gyhi astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.5rem;"><path d="M17.92 11.62a1.001 1.001 0 0 0-.21-.33l-5-5a1.003 1.003 0 1 0-1.42 1.42l3.3 3.29H7a1 1 0 0 0 0 2h7.59l-3.3 3.29a1.002 1.002 0 0 0 .325 1.639 1 1 0 0 0 1.095-.219l5-5a1 1 0 0 0 .21-.33 1 1 0 0 0 0-.76Z"/></svg>  <span class="astro-u2l5gyhi"> Next <br class="astro-u2l5gyhi"> <span class="link-title astro-u2l5gyhi">Checklist</span> </span> </a> </div>   </footer>  </div> </div>   </main> </div> </div>  </div> </div>  </body></html>

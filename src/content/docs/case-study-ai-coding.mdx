@@ -1,34 +1,185 @@
 ---
-title: Case study — AI coding copilot panel
+title: "Case study: AI coding copilot panel"
+description: Designing a code assistant that integrates into developer workflow without breaking flow.
 ---
 
-# Case study: Coding copilot panel for PR workflows
+# Case study: AI coding copilot panel
 
-## Problem
-- AI suggestions were hard to review
-- Engineers feared blind code changes
+**Goal**: Build a side panel that helps developers generate, edit, and understand code without leaving their editor context.
 
-## Design decisions
-- Split view: prompt + diff preview
-- Chunk-level approve/reject controls
-- Inline rationale for each suggested edit
-- One-click rollback after apply
+## The challenge
 
-## UI pattern (shadcn-style composition)
-```tsx
-<Card>
-  <CardHeader>Suggested Patch</CardHeader>
-  <CardContent>{/* unified diff */}</CardContent>
-  <CardFooter>{/* Approve / Reject / Apply */}</CardFooter>
-</Card>
+Developers are protective of their workflow. Alt-tab to ChatGPT breaks flow. Inline suggestions are intrusive if wrong. The copilot needs to be helpful without being annoying—available but not in the way.
+
+## Layout structure
+
+```
+┌─────────────────────────────────────────────────────┐
+│  Editor (primary workspace)          │  AI Panel   │
+│  ┌─────────────────────────────────┐ │  ┌───────┐  │
+│  │                                 │ │  │Context│  │
+│  │   Active code file              │ │  │       │  │
+│  │                                 │ │  ├───────┤  │
+│  │                                 │ │  │Chat   │  │
+│  │                                 │ │  │       │  │
+│  └─────────────────────────────────┘ │  │       │  │
+│  ┌─────────────────────────────────┐ │  ├───────┤  │
+│  │   Terminal / Output             │ │  │Input  │  │
+│  └─────────────────────────────────┘ │  └───────┘  │
+└─────────────────────────────────────────────────────┘
 ```
 
-## Result metrics
-- Patch acceptance rate: +29%
-- Review cycle time: -31%
-- Reverted AI commits: -44%
+**Panel width**: 320-400px (collapsible)  
+**Toggle**: Keyboard shortcut (Cmd+Shift+A or similar)
 
-## Why it worked
-- Trust came from explicit review controls
-- Explanations reduced ambiguity
-- Safer apply flow lowered risk
+## Critical UI elements
+
+### 1. Context awareness display
+Show what the AI "sees":
+
+```html
+<div class="context-badge">
+  <span class="file">auth.ts</span>
+  <span class="selection">lines 45-62</span>
+</div>
+```
+
+Developers need to know what's in context. Invisible context = unpredictable outputs.
+
+### 2. Code blocks with actions
+
+```html
+<div class="code-response">
+  <div class="code-header">
+    <span class="language">TypeScript</span>
+    <div class="actions">
+      <button>Copy</button>
+      <button>Apply</button>
+      <button>Diff</button>
+    </div>
+  </div>
+  <pre><code>function validateUser(user: User) {
+  return user.email && user.role;
+}</code></pre>
+</div>
+```
+
+**Apply**: Insert at cursor  
+**Diff**: Show changes against current code  
+**Copy**: Fallback for manual paste
+
+### 3. Diff viewer for edits
+
+```html
+<div class="diff-view">
+  <div class="diff-line removed">- const x = 1;</div>
+  <div class="diff-line added">+ const x: number = 1;</div>
+  <div class="diff-actions">
+    <button class="accept">Accept</button>
+    <button class="reject">Reject</button>
+    <button class="edit">Edit</button>
+  </div>
+</div>
+```
+
+Never auto-apply code changes. Always show the diff first.
+
+### 4. Quick actions
+
+```html
+<div class="quick-actions">
+  <button>/explain</button>
+  <button>/refactor</button>
+  <button>/test</button>
+  <button>/fix</button>
+</div>
+```
+
+Slash commands for common tasks. Faster than typing full prompts.
+
+## Token application
+
+| Element | Spacing | Typography | Notes |
+|---------|---------|------------|-------|
+| Panel padding | `--space-3` (12px) | - | Compact for side panel |
+| Message gap | `--space-3` (12px) | - | Tighter than support chat |
+| Code blocks | `--space-2` padding | Monospace 13px | Match editor font |
+| Context badges | `--space-1` gap | `--text-xs` | Unobtrusive |
+
+## Interaction patterns
+
+### Selection-based prompts
+User selects code → panel shows contextual actions:
+
+```html
+<div class="selection-prompt">
+  <p>Selected: <code>validateUser</code> function</p>
+  <button>Explain this</button>
+  <button>Add types</button>
+  <button>Write tests</button>
+</div>
+```
+
+### Streaming code generation
+Stream tokens into a temporary buffer, not directly into the editor:
+
+```
+┌─────────────────────┐
+│ Generating...       │
+│ ▌                   │
+│ function validate   │
+│ ●●●                 │
+└─────────────────────┘
+```
+
+### Error explanations
+When terminal shows error, offer explanation:
+
+```html
+<div class="error-assist">
+  <p class="error">TypeError: Cannot read 'map' of undefined</p>
+  <button>Explain this error</button>
+  <button>Suggest fix</button>
+</div>
+```
+
+## Keyboard-first design
+
+| Shortcut | Action |
+|----------|--------|
+| `Cmd+Shift+A` | Toggle panel |
+| `Cmd+Enter` | Send prompt |
+| `Cmd+Shift+Enter` | Apply suggestion |
+| `Esc` | Cancel/close diff |
+| `Tab` | Accept autocomplete |
+
+Every action must be keyboard-accessible. Developers hate reaching for the mouse.
+
+## Common mistakes
+
+❌ **Auto-applying code**: Changes appear without consent  
+✅ **Diff first, apply on confirm**: User stays in control
+
+❌ **No context visibility**: AI hallucinates because wrong file is in context  
+✅ **Show context clearly**: File name, line numbers, selection
+
+❌ **Chat-only interface**: Have to type everything  
+✅ **Quick actions**: One-click for common tasks
+
+❌ **Blocking the editor**: Panel covers code  
+✅ **Collapsible, resizable**: User controls panel size
+
+❌ **Slow responses**: Waiting kills flow  
+✅ **Stream immediately**: First token in under 500ms
+
+## What good looks like
+
+1. Developer selects a function
+2. Panel shows: "Selected: `processOrder` (23 lines)"
+3. Quick actions appear: Explain, Refactor, Test
+4. Developer clicks "Test"
+5. AI streams test code into preview
+6. Developer clicks "Apply" → code inserted below function
+7. Panel auto-suggests: "Run tests?"
+
+The copilot extends the developer's capabilities without interrupting their mental model of the code.

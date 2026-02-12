@@ -1,42 +1,188 @@
 ---
 title: Pre-coding workflow
+description: A systematic process for UI decisions that eliminates guesswork before you write code.
 ---
 
-# Pre-coding workflow (no guesswork)
+# Pre-coding workflow
 
-Design decisions should happen **before** CSS.
+The worst time to make design decisions is while you're coding. You're in implementation mode, not design mode. Decisions get made by accident. Inconsistencies creep in.
 
-## Step 0 — Set constraints (2 min)
-- Density: compact vs comfortable
-- Max content width: 960 / 1040 / 1200
-- Grid: 12-col desktop, 4-col mobile
-- Gutters: `32`
+This workflow front-loads the thinking so coding becomes execution.
 
-## Step 1 — Box layout using only spacing tokens (10–15 min)
-Decide:
-- Section padding: `48`
-- Card padding: `24`
-- Major vertical rhythm: `32`
-- Inside-card gaps: `12` or `16`
+## The 4-step process
 
-## Step 2 — Typography pass (5–10 min)
-Assign roles:
-- Page title: `text-2xl` + `lh-tight`
-- Section title: `text-xl` + `lh-tight`
-- Body: `text-md` + `lh-normal`
-- Labels: `text-sm`
+### Step 1: Content inventory (10 min)
 
-## Step 3 — Component pass (5 min)
-Pick sizes:
-- Default controls: `control-md`
-- Table/search: `control-lg` if comfortable
+Before touching layout, list everything that needs to be on the screen:
 
-## Step 4 — Color pass (5 min)
-- Apply surfaces + text + border
-- Apply one accent for primary actions
-- Confirm focus/hover/disabled states
+**Example: User profile page**
+```
+- Avatar (editable)
+- Display name
+- Email (verified badge)
+- Bio (optional, 160 char max)
+- Join date
+- Plan type (Free/Pro/Team)
+- Usage stats (3 metrics)
+- Edit button
+- Upgrade CTA (if Free)
+- Danger zone (delete account)
+```
 
-## Step 5 — Implement (mechanical)
-Translate decisions into code using tokens.
+No hierarchy yet. Just what exists.
 
-If you feel yourself tweaking pixels, go back a step and update tokens/rules instead.
+**Why this matters**: You can't design what you haven't defined. Missing elements surface here, not during code review.
+
+### Step 2: Hierarchy mapping (10 min)
+
+Rank by importance (1 = most important):
+
+```
+1. Display name, avatar (identity)
+2. Plan type, usage stats (status)
+3. Email, bio (details)
+4. Edit, upgrade (actions)
+5. Join date (metadata)
+6. Delete account (rare, dangerous)
+```
+
+Now assign visual weight:
+- Level 1-2: Large, prominent
+- Level 3-4: Normal, clear
+- Level 5-6: Small, subtle
+
+**Why this matters**: Hierarchy prevents "everything is equally important" layouts. Users know where to look.
+
+### Step 3: Token selection (15 min)
+
+Map each element to design tokens:
+
+| Element | Typography | Spacing | Color |
+|---------|------------|---------|-------|
+| Display name | `--text-2xl`, semibold | `--space-2` below | `--color-text` |
+| Avatar | 64px | `--space-4` right | - |
+| Plan badge | `--text-xs`, medium | `--space-1` padding | Primary for Pro |
+| Section gap | - | `--space-8` | - |
+| Danger zone | `--text-sm` | `--space-6` top | Error color |
+
+Every choice references a token. No magic numbers.
+
+**Why this matters**: Consistency is automatic when you use the same tokens everywhere.
+
+### Step 4: State documentation (10 min)
+
+List all possible states:
+
+**Loading**
+- Skeleton for avatar, name, stats
+- Disabled edit button
+
+**Empty states**
+- No bio: "Add a bio to tell people about yourself"
+- No usage: "Start using the product to see stats"
+
+**Error states**
+- Avatar upload failed: inline error + retry
+- Save failed: toast + retry button
+
+**Edge cases**
+- Very long name: truncate with ellipsis
+- Missing email verification: warning banner
+
+**Why this matters**: States that aren't designed become bugs. Document them upfront.
+
+## Putting it together
+
+Your pre-coding artifact should look like this:
+
+```markdown
+# Profile Page - Design Spec
+
+## Content
+- Avatar (64px, editable)
+- Display name (--text-2xl)
+- Email + verified badge
+- Bio (--text-base, muted if empty)
+- Plan badge (Pro = primary color)
+- Stats: 3 cards, --space-4 gap
+- Actions: Edit (secondary), Upgrade (primary)
+- Danger zone: --space-8 separation
+
+## States
+- Loading: skeleton loader
+- Empty bio: placeholder CTA
+- Free plan: show upgrade CTA
+- Pro plan: hide upgrade CTA
+
+## Mobile adaptations
+- Stats stack vertically
+- Avatar shrinks to 48px
+- Danger zone in collapsible
+```
+
+This becomes your checklist during implementation.
+
+## Time investment
+
+| Step | Time | Output |
+|------|------|--------|
+| Content inventory | 10 min | Complete element list |
+| Hierarchy mapping | 10 min | Priority ranking |
+| Token selection | 15 min | Token-to-element mapping |
+| State documentation | 10 min | All states listed |
+| **Total** | **45 min** | Complete design spec |
+
+45 minutes of planning saves hours of "hmm, what size should this be?" and rework.
+
+## Common shortcuts (and why they fail)
+
+❌ **"I'll figure it out while coding"**  
+Result: Inconsistent spacing, missed states, rework
+
+❌ **"The design is in my head"**  
+Result: Details forgotten, different interpretation by others
+
+❌ **"Let's just use what we did last time"**  
+Result: Copy-paste without thinking, doesn't fit new context
+
+❌ **"We don't have time for this"**  
+Result: Spend 3x the time fixing issues later
+
+## When to skip this
+
+You can abbreviate the process for:
+- **Tiny changes**: Single button text change
+- **Exact replication**: Copying an existing component verbatim
+- **Prototypes**: Throwaway explorations
+
+But for any new screen or significant feature, do the work.
+
+## Template
+
+Copy this for every new screen:
+
+```markdown
+# [Screen Name] - Design Spec
+
+## Content inventory
+- 
+
+## Hierarchy (1=highest)
+1. 
+2. 
+3. 
+
+## Token mapping
+| Element | Typography | Spacing | Color |
+
+## States
+- Loading:
+- Empty:
+- Error:
+- Edge cases:
+
+## Mobile adaptations
+- 
+```
+
+Fill it in before opening your code editor. Your future self will thank you.

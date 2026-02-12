@@ -1,32 +1,112 @@
 ---
 title: Spacing tokens
+description: A systematic approach to spacing that eliminates guesswork and creates visual harmony.
 ---
 
-# Spacing tokens (8px grid + 4px micro)
+# Spacing tokens
 
-Use **8px** as the main rhythm and allow **4px** for micro-alignment.
+Spacing is the invisible architecture of UI. Get it right, and everything feels intentional. Get it wrong, and users sense something's off—even if they can't articulate why.
 
-## Recommended spacing scale
-- `space-0`: 0
-- `space-1`: 4
-- `space-2`: 8
-- `space-3`: 12
-- `space-4`: 16
-- `space-5`: 24
-- `space-6`: 32
-- `space-7`: 40
-- `space-8`: 48
-- `space-9`: 64
-- `space-10`: 80
-- `space-11`: 96
+## The 4px base unit
 
-## Anti-guesswork rules
-- **Inside components:** only `{4, 8, 12, 16, 24}`
-- **Between sections:** only `{24, 32, 48, 64}`
-- No one-off values in production (`18px`, `22px`) unless promoted to a token.
+Every spacing value in this system is a multiple of 4px. Why 4?
 
-## Defaults that work in most apps
-- Section padding: `48`
-- Card padding: `24`
-- Inside-card stack gap: `12` or `16`
-- Major vertical rhythm: `32`
+- **Divisible**: 4 divides cleanly into common screen sizes
+- **Scalable**: Works from mobile to 4K displays
+- **Memorable**: Easy mental math (8, 12, 16, 24, 32...)
+- **Industry standard**: Used by Material Design, Tailwind, and most modern systems
+
+## The token scale
+
+| Token | Value | Use case |
+|-------|-------|----------|
+| `--space-1` | 4px | Tight inline spacing, icon gaps |
+| `--space-2` | 8px | Related element spacing, input padding-x |
+| `--space-3` | 12px | Default component padding |
+| `--space-4` | 16px | Section padding, card gaps |
+| `--space-6` | 24px | Major section breaks |
+| `--space-8` | 32px | Page section margins |
+| `--space-12` | 48px | Hero sections, major landmarks |
+| `--space-16` | 64px | Page-level breathing room |
+
+## Practical patterns
+
+### Card padding
+```css
+.card {
+  padding: var(--space-4); /* 16px all around */
+}
+.card-compact {
+  padding: var(--space-3); /* 12px for dense UIs */
+}
+```
+
+### Stack spacing (vertical rhythm)
+```css
+.stack > * + * {
+  margin-top: var(--space-4); /* 16px between siblings */
+}
+.stack-tight > * + * {
+  margin-top: var(--space-2); /* 8px for related items */
+}
+```
+
+### Inline spacing
+```css
+.inline-group {
+  gap: var(--space-2); /* 8px between inline elements */
+}
+.button-group {
+  gap: var(--space-3); /* 12px between buttons */
+}
+```
+
+## The proximity principle
+
+**Related things stay close. Unrelated things stay apart.**
+
+- Form label to input: `--space-1` (4px) — they're a unit
+- Between form fields: `--space-4` (16px) — distinct but grouped
+- Between form sections: `--space-8` (32px) — clear separation
+
+## Common mistakes
+
+❌ **Using arbitrary values**: `padding: 13px` breaks the rhythm  
+✅ **Use the scale**: `padding: var(--space-3)` (12px)
+
+❌ **Inconsistent gaps**: Different spacing for similar components  
+✅ **Same relationship = same spacing**: All card gaps use `--space-4`
+
+❌ **Too little breathing room**: Cramped interfaces feel cheap  
+✅ **When in doubt, go larger**: `--space-6` often beats `--space-4`
+
+## Tailwind mapping
+
+```js
+// tailwind.config.js
+module.exports = {
+  theme: {
+    spacing: {
+      '1': '4px',
+      '2': '8px',
+      '3': '12px',
+      '4': '16px',
+      '6': '24px',
+      '8': '32px',
+      '12': '48px',
+      '16': '64px',
+    }
+  }
+}
+```
+
+Use with utilities: `p-4` (16px padding), `gap-3` (12px gap), `mt-8` (32px margin-top).
+
+## Quick reference
+
+- **Micro spacing** (4-8px): Icons, inline elements, tight relationships
+- **Component spacing** (12-16px): Padding, gaps between related items
+- **Section spacing** (24-32px): Visual breaks, grouping boundaries
+- **Page spacing** (48-64px): Major landmarks, hero areas
+
+Master these, and your UIs will feel professionally crafted without conscious effort.

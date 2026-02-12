@@ -1,34 +1,154 @@
 ---
-title: Case study — AI support assistant
+title: "Case study: AI support assistant"
+description: Building a support copilot that users actually trust with their questions.
 ---
 
-# Case study: AI support assistant UX upgrade
+# Case study: AI support assistant
 
-## Problem
-- High ticket volume
-- Slow first response
-- Inconsistent answer quality
+**Goal**: Replace the wall of FAQ text with a conversational interface that answers product questions, cites sources, and knows when to escalate.
 
-## Design decisions
-- 2-column layout: chat + source panel
-- Always-visible citations in each answer
-- Composer quick actions: “summarize ticket”, “draft reply”, “escalate to human”
-- Confidence badge (High/Med/Low)
+## The challenge
 
-## UI pattern (Tailwind-style)
+Support teams drown in repetitive questions. Users hate searching through docs. The solution seems obvious: AI chatbot. But most AI support bots feel like talking to a brick wall with a language model behind it.
+
+The difference between "helpful assistant" and "annoying chatbot" comes down to UI decisions.
+
+## Layout structure
+
+```
+┌────────────────────────────────────────────┐
+│  Header: Product logo + "Support" + Status │
+├───────────────────────┬────────────────────┤
+│                       │                    │
+│   Conversation        │   Source Panel     │
+│   Thread              │   (collapsed on    │
+│                       │    mobile)         │
+│                       │                    │
+├───────────────────────┴────────────────────┤
+│  Composer: Input + Attach + Send           │
+└────────────────────────────────────────────┘
+```
+
+**Desktop**: 60/40 split between chat and sources  
+**Mobile**: Full-width chat, sources slide up on tap
+
+## Critical UI elements
+
+### 1. Message bubbles with citations
+Every factual claim needs a source link:
+
 ```html
-<div class="grid gap-4 lg:grid-cols-[1fr_320px]">
-  <section class="rounded-2xl border p-4">Chat thread</section>
-  <aside class="rounded-2xl border p-4">Sources + policy links</aside>
+<div class="message assistant">
+  <p>Your subscription renews on the 15th of each month. 
+     <a class="citation" href="#billing-docs">Source: Billing FAQ</a>
+  </p>
 </div>
 ```
 
-## Result metrics
-- First response time: -38%
-- Agent handling time: -22%
-- CSAT: +11 points
+Why: Users need to verify. If they can't check the source, they'll ask a human anyway.
 
-## Why it worked
-- Trust improved via citations
-- Less context switching for support agents
-- Clear escalation reduced bad automation outcomes
+### 2. Confidence indicators
+Not all answers are equal:
+
+```html
+<div class="confidence high">
+  <span class="badge">High confidence</span>
+  <p>Based on 3 documentation matches</p>
+</div>
+
+<div class="confidence low">
+  <span class="badge">Best effort</span>
+  <p>No exact match found. This may not be accurate.</p>
+</div>
+```
+
+### 3. Escalation paths
+Always provide an out:
+
+```html
+<div class="escalation-prompt">
+  <p>Would you like to:</p>
+  <button>Talk to a human</button>
+  <button>Create a ticket</button>
+  <button>Schedule a call</button>
+</div>
+```
+
+Show this after 2-3 exchanges that don't resolve the issue.
+
+### 4. Suggested follow-ups
+Reduce user effort:
+
+```html
+<div class="suggestions">
+  <button class="chip">How do I cancel?</button>
+  <button class="chip">Can I get a refund?</button>
+  <button class="chip">Change payment method</button>
+</div>
+```
+
+## Token application
+
+| Element | Spacing | Typography | Notes |
+|---------|---------|------------|-------|
+| Message gap | `--space-4` (16px) | - | Between messages |
+| Message padding | `--space-3` (12px) | - | Inside bubble |
+| Body text | - | `--text-base` | 16px |
+| Citations | - | `--text-sm` | 14px, muted color |
+| Suggestions | `--space-2` gap | `--text-sm` | Chip buttons |
+
+## Interaction patterns
+
+### Typing indicator
+Show something alive:
+```html
+<div class="typing-indicator">
+  <span>●</span><span>●</span><span>●</span>
+</div>
+```
+
+### Streaming responses
+Don't wait for complete response—stream tokens as they arrive. Feels faster even if total time is the same.
+
+### Error handling
+```html
+<div class="error-state">
+  <p>I couldn't process that request.</p>
+  <button>Try again</button>
+  <button>Talk to support</button>
+</div>
+```
+
+Never dead-end the user.
+
+## Metrics that matter
+
+- **Resolution rate**: Did they stop asking questions?
+- **Escalation rate**: How often do they bail to human?
+- **Citation click rate**: Are they verifying? (Good if moderate, bad if constant)
+- **Retry rate**: Are they rephrasing? (Indicates confusion)
+
+## Common mistakes
+
+❌ **No sources**: "Trust me, I'm AI"  
+✅ **Citations on every fact**: Let users verify
+
+❌ **Infinite loop**: Bot keeps failing, user keeps trying  
+✅ **Escalation path**: Offer human help after 2-3 failures
+
+❌ **Generic responses**: "I'm here to help!"  
+✅ **Specific actions**: "Click Settings → Billing to update"
+
+❌ **Hidden limitations**: User finds out the hard way  
+✅ **Upfront clarity**: "I can help with billing and account questions"
+
+## What good looks like
+
+1. User asks question
+2. Assistant answers with inline citations
+3. Source panel highlights relevant docs
+4. Follow-up suggestions appear
+5. If unresolved after 2 turns, escalation prompt shows
+6. Human handoff is seamless (context preserved)
+
+The AI isn't replacing support—it's the first line of defense that handles the easy 80% so humans can focus on the hard 20%.

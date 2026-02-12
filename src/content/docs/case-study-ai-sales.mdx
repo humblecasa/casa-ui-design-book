@@ -1,34 +1,224 @@
 ---
-title: Case study — AI sales research workspace
+title: "Case study: AI sales research workspace"
+description: Building a research tool that helps sales teams understand prospects before calls.
 ---
 
 # Case study: AI sales research workspace
 
-## Problem
-- Reps spent too long gathering account context
-- Outputs were generic and not CRM-ready
+**Goal**: Give sales reps a single workspace where AI aggregates company research, finds contacts, and drafts personalized outreach—cutting hours of prep into minutes.
 
-## Design decisions
-- 3-pane UI: chat, account context, output templates
-- Source recency tags on every fact
-- “Export to CRM” action on generated notes
-- Prompt chips: “Account brief”, “Competitor delta”, “Objection handling”
+## The challenge
 
-## UI pattern (layout + action rail)
+Sales reps spend 30-40% of their time researching prospects. They bounce between LinkedIn, company websites, news articles, and CRM. By the time they're ready to call, they've forgotten half of what they read.
+
+The workspace needs to aggregate, synthesize, and make research actionable.
+
+## Layout structure
+
+```
+┌──────────────────────────────────────────────────────────┐
+│  Search bar: "Company or contact name"                   │
+├─────────────────────┬────────────────────────────────────┤
+│                     │                                    │
+│  Company Profile    │   AI Insights Panel                │
+│  ┌────────────────┐ │   ┌──────────────────────────────┐ │
+│  │ Logo, name     │ │   │ Key findings                 │ │
+│  │ Industry       │ │   │ • Recent funding round       │ │
+│  │ Size, location │ │   │ • New product launch         │ │
+│  │ Tech stack     │ │   │ • Leadership change          │ │
+│  └────────────────┘ │   └──────────────────────────────┘ │
+│                     │   ┌──────────────────────────────┐ │
+│  Key Contacts       │   │ Suggested talking points     │ │
+│  ┌────────────────┐ │   │ • "Congrats on Series B..."  │ │
+│  │ Contact cards  │ │   │ • "Saw your launch of..."    │ │
+│  └────────────────┘ │   └──────────────────────────────┘ │
+│                     │   ┌──────────────────────────────┐ │
+│  News & Activity    │   │ Draft outreach               │ │
+│  ┌────────────────┐ │   │ [Generate email] [LinkedIn]  │ │
+│  │ Recent news    │ │   └──────────────────────────────┘ │
+│  │ Job postings   │ │                                    │
+│  └────────────────┘ │                                    │
+├─────────────────────┴────────────────────────────────────┤
+│  Actions: Save to CRM | Create task | Schedule call      │
+└──────────────────────────────────────────────────────────┘
+```
+
+**Desktop**: 40/60 split (data / insights)  
+**Tablet**: Stacked, insights collapsed by default
+
+## Critical UI elements
+
+### 1. Company snapshot card
+
 ```html
-<div class="grid gap-4 xl:grid-cols-[280px_1fr_320px]">
-  <aside>Template chips</aside>
-  <main>Conversation + generated output</main>
-  <aside>Account facts + recency</aside>
+<div class="company-card">
+  <img src="logo.png" class="company-logo" />
+  <div>
+    <h2>Acme Corp</h2>
+    <p class="meta">Series B • 150-200 employees • SF, CA</p>
+    <div class="tags">
+      <span class="tag">SaaS</span>
+      <span class="tag">B2B</span>
+      <span class="tag">Fintech</span>
+    </div>
+  </div>
+  <div class="freshness">
+    <span>Updated 2 hours ago</span>
+    <button>Refresh</button>
+  </div>
 </div>
 ```
 
-## Result metrics
-- Research time per account: -47%
-- Meeting prep quality score: +26%
-- CRM note completion rate: +34%
+Data freshness matters. Stale info kills credibility in calls.
 
-## Why it worked
-- Better context grounding
-- Faster output reuse
-- Less friction from chat to workflow system
+### 2. AI-generated insights
+
+```html
+<div class="insight-card priority-high">
+  <span class="badge">Recent Event</span>
+  <h3>Raised $25M Series B</h3>
+  <p>Announced March 15, led by Sequoia. Likely hiring 
+     and expanding product lines.</p>
+  <div class="sources">
+    <a href="#">TechCrunch</a>
+    <a href="#">Press Release</a>
+  </div>
+  <button class="use-in-outreach">Use in outreach →</button>
+</div>
+```
+
+**Priority levels**: High (recent, actionable), Medium (context), Low (background)
+
+### 3. Contact cards with engagement signals
+
+```html
+<div class="contact-card">
+  <img src="avatar.jpg" class="avatar" />
+  <div>
+    <h4>Jane Smith</h4>
+    <p>VP of Engineering</p>
+    <div class="signals">
+      <span class="signal hot">Posted 2 days ago</span>
+      <span class="signal">2nd connection</span>
+    </div>
+  </div>
+  <div class="actions">
+    <button>LinkedIn</button>
+    <button>Email</button>
+    <button>Add to sequence</button>
+  </div>
+</div>
+```
+
+### 4. Draft outreach generator
+
+```html
+<div class="outreach-draft">
+  <div class="draft-header">
+    <span>AI Draft</span>
+    <select>
+      <option>Cold email</option>
+      <option>LinkedIn message</option>
+      <option>Follow-up</option>
+    </select>
+  </div>
+  <textarea>
+    Hi Jane,
+    
+    Congrats on Acme's Series B—exciting times! 
+    
+    I noticed you're expanding the engineering team...
+  </textarea>
+  <div class="draft-actions">
+    <button>Regenerate</button>
+    <button>Edit</button>
+    <button class="primary">Copy & Send</button>
+  </div>
+</div>
+```
+
+AI drafts, human edits. Never send without review.
+
+## Token application
+
+| Element | Spacing | Typography | Notes |
+|---------|---------|------------|-------|
+| Card padding | `--space-4` (16px) | - | Standard cards |
+| Card gap | `--space-4` (16px) | - | Between cards |
+| Insight title | - | `--text-lg`, semibold | Scannable |
+| Meta text | - | `--text-sm`, muted | Secondary info |
+| Badges | `--space-1` padding | `--text-xs` | Compact labels |
+
+## Interaction patterns
+
+### Progressive loading
+Don't block the whole page:
+
+```
+1. Instant: Show search, company name
+2. Fast (1s): Basic profile, contacts
+3. Background (2-5s): News, insights, AI drafts
+```
+
+Skeleton loaders for each section independently.
+
+### Source verification
+Every insight links to original source:
+
+```html
+<p>Acme launched a new API product last week.
+   <a href="#" class="source-link">
+     <span class="icon">🔗</span> Company Blog
+   </a>
+</p>
+```
+
+Sales reps need to verify before mentioning in calls.
+
+### CRM sync
+Two-way sync with Salesforce/HubSpot:
+
+```html
+<div class="crm-status">
+  <span class="synced">✓ Synced to Salesforce</span>
+  <button>View in CRM</button>
+</div>
+```
+
+Data entered here should appear in CRM. Data from CRM should appear here.
+
+## Common mistakes
+
+❌ **Information overload**: Every possible data point shown  
+✅ **Prioritized insights**: AI highlights what matters now
+
+❌ **Stale data**: Last updated 6 months ago  
+✅ **Freshness indicators**: Clear timestamps, refresh buttons
+
+❌ **Copy/paste hell**: Draft in one place, send in another  
+✅ **Direct actions**: "Copy & Send" opens email client with draft
+
+❌ **No verification**: AI claims without sources  
+✅ **Source links**: Every insight traceable to origin
+
+❌ **Manual entry**: Type everything into CRM again  
+✅ **Auto-sync**: One-click save to CRM
+
+## Metrics that matter
+
+- **Prep time reduction**: Hours saved per account
+- **Insight usage**: Do reps use AI suggestions in calls?
+- **Outreach conversion**: Do AI-drafted messages perform better?
+- **Data freshness**: How often is stale data flagged?
+
+## What good looks like
+
+1. Rep types "Acme Corp"
+2. Within 1 second: company card, basic profile
+3. Within 3 seconds: contacts, news, AI insights
+4. Rep sees: "Series B last month" flagged as high priority
+5. One click: "Use in outreach" pre-fills email draft
+6. Rep edits 2 sentences, clicks "Copy & Send"
+7. Auto-logged to Salesforce with all context
+
+Total time: 3 minutes vs. 30 minutes manual research. And the outreach is more personalized because the insights were surfaced, not buried in 15 browser tabs.
